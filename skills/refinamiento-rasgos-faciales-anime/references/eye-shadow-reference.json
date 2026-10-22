@@ -1,0 +1,10 @@
+{
+  "schema": "fita-eye-shadow-reference/v1",
+  "source": "ReferenceAvatar, malla manual eye_shadows inspeccionada en Blender el 2026-10-19",
+  "provenance": "conteos y conectividad medidos; criterios de adaptación derivados de la construcción y solicitud del artista",
+  "mesh": {"vertices":32,"quads":14,"components":2,"modifiers":0,"thickness":0},
+  "perEye": {"vertices":16,"quads":7,"triangles":14,"rows":2,"verticesPerRow":8},
+  "canonicalStripFaces": [[0,1,9,8],[1,2,10,9],[2,3,11,10],[3,4,12,11],[4,5,13,12],[5,6,14,13],[6,7,15,14]],
+  "material": {"color":"#000000","initialOpacity":0.25,"opacityProvenance":"valor elegido, editable; no medido en la referencia sin material","alphaMode":"BLEND","unlit":true},
+  "reuse": "Adaptar a cada ojo. No reutilizar coordenadas, escala, transformación ni índices originales."
+}

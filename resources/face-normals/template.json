@@ -1,0 +1,29 @@
+{
+  "schema": "workbench-face-mask-template/v1",
+  "name": "FITA_FaceNormalMask",
+  "gltfAxes": {
+    "up": "+Y",
+    "front": "+Z"
+  },
+  "center": [
+    0,
+    0,
+    0
+  ],
+  "radii": [
+    1,
+    1,
+    1
+  ],
+  "rotation": [
+    0,
+    0,
+    0,
+    1
+  ],
+  "openBack": true,
+  "exportWithCharacter": false,
+  "fit": "Scale, rotate and place per character; review skin weights separately",
+  "units": "normalized, not a physical face measurement",
+  "provenance": "FITA procedural template; unit dimensions chosen for reuse"
+}

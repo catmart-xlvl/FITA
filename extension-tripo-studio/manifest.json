@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "FITA · Tripo Studio Bridge",
+  "version": "0.2.77",
+  "minimum_chrome_version": "120",
+  "description": "Tripo Studio bridge for explicit local project commands, with per-tab consent and cost confirmation. English / Español / 日本語.",
+  "permissions": ["scripting", "storage", "alarms", "downloads", "contentSettings"],
+  "host_permissions": ["https://studio.tripo3d.ai/*", "http://127.0.0.1:4317/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "icons": {"16":"icons/16.png","32":"icons/32.png","48":"icons/48.png","128":"icons/128.png"},
+  "action": { "default_popup": "popup.html", "default_title": "Connect Tripo Studio to local FITA" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'; connect-src http://127.0.0.1:4317" }
+}

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Theme layer: dark brushed-metal stripes + FITA neon wordmark. Loaded after motion.css.
+   Static background (no animation). One fixed layer, so scrolling does not repaint it.
+   ========================================================================== */
+html{background:#08090a}body{background:transparent}
+.app-shell.home,.app-shell.studio{background:transparent}
+.app-shell::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 75% 55% at 88% -12%,rgb(19 86 128 / .2),transparent 62%),
+    radial-gradient(ellipse 55% 45% at -5% 112%,rgb(16 70 105 / .16),transparent 60%),
+    linear-gradient(180deg,rgb(255 255 255 / .018),transparent 35%,rgb(0 0 0 / .35)),
+    repeating-linear-gradient(118deg,rgb(255 255 255 / .014) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(118deg,#090a0c 0,#111217 8.8vmax,#090a0c 16.5vmax,#141a20 16.6vmax,#040405 16.9vmax,#08090b 17.1vmax,#0f1015 25.2vmax,#08090b 33.3vmax,#12161c 33.4vmax,#040405 33.7vmax,#090a0c 34vmax),
+    #08090a}
+.home .topbar{background:rgb(9 9 10 / .78);backdrop-filter:blur(10px);border-bottom-color:#1c2129}
+
+/* ---------- FITA wordmark (centered in the top bar) ---------- */
+.topbar{position:relative;container-type:inline-size}
+.topbar-brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;width:150px;padding:4px 8px;border:0;background:none;cursor:pointer;border-radius:8px;transition:transform .25s var(--wb-ease,ease)}
+/* No glow at rest; the neon glow appears only on hover (DIS-002 v03). Transparent shadows keep the transition smooth. */
+.topbar-brand svg,.sidebar-logo svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 0 transparent) drop-shadow(0 0 0 transparent) drop-shadow(0 0 0 transparent);transition:filter .35s}
+.topbar-brand:hover{transform:translate(-50%,-50%) scale(1.04)}
+.topbar-brand:hover svg{filter:drop-shadow(0 0 1.5px #ffffff80) drop-shadow(0 0 5px #cfe6ff66) drop-shadow(0 0 12px #9fcfff40)}
+.topbar-brand:active{transform:translate(-50%,-50%) scale(.97)}
+.brand-word{font-family:Impact,Anton,'Haettenschweiler','Arial Black',sans-serif;font-size:52px;font-weight:400;letter-spacing:0;paint-order:stroke;stroke:#0a111c;stroke-width:3.2px;stroke-linejoin:round}
+.neon-core{opacity:.85}
+.neon-dot{fill:#e6f4ff;stroke-width:1.6}
+
+
+
+.effects-off .neon-letter{animation:none}
+@container (max-width:780px){.topbar-brand{display:none}}
+@container (max-width:1000px){.studio .topbar-brand{display:none}}
+@media(prefers-reduced-motion:reduce){.neon-letter{animation:none}}
+
+/* Inside a project the wordmark lives in the sidebar (replaces the old name + LOCAL WORKSPACE). */
+.sidebar .brand .brand-mark{display:none}
+.sidebar-logo{display:block;width:100%;max-width:150px;padding:2px 0;border:0;background:none;cursor:pointer;transition:transform .25s var(--wb-ease,ease)}
+.sidebar-logo:hover{transform:scale(1.04)}.sidebar-logo:hover svg{filter:drop-shadow(0 0 1.5px #ffffff80) drop-shadow(0 0 4px #cfe6ff66) drop-shadow(0 0 10px #9fcfff40)}
+.sidebar-logo:active{transform:scale(.97)}
+@media(max-width:1100px){.sidebar .brand .brand-mark{display:grid}.sidebar-logo{display:none}}

@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {vrchatPreparationFiles} from '../server/vrchat-preparation-resources.js';
+
+test('VRChat facial handoff has consistent camera-on defaults and independent menu localization',async()=>{
+  const files=await vrchatPreparationFiles(),profile=JSON.parse(files['VRCHAT_PC_REFERENCE_PROFILE.json']);
+  const {facial}=profile,language=facial.menuLanguage,blink=facial.blink;
+  assert(files[facial.guide]?.length,'profile references a delivered facial guide');
+  assert.equal(language.default,'en');
+  assert.equal(language.askWhenUnspecified,true);
+  assert.equal(language.translateDisplayLabelsOnly,true);
+  assert.deepEqual(Object.keys(language.labels.en).sort(),Object.keys(language.labels.es).sort(),'Spanish overrides cover the complete English menu, including axes');
+  assert.equal(language.labels.en[blink.labelKey],'Camera Blink');
+  assert.equal(language.labels.es[blink.labelKey],'Parpadeo cámara');
+  assert.equal(blink.parameter,'FITA_BlinkCamera');
+  assert.equal(blink.parameterType,'Bool');
+  assert.equal(blink.defaultEnabled,true);
+  assert.equal(blink.animatorDefault,true);
+  assert.equal(blink.expressionDefault,1);
+  assert.equal(blink.saved,false);
+  assert.equal(blink.menuControl,'Toggle');
+  assert.equal(blink.menuOnValue,1);
+  assert.equal(blink.defaultState,'Camera');
+  assert.deepEqual(blink.initialRendererEnabled,{camera:true,stable:false});
+  assert.match(blink.offMode,/automatic blink; native gaze stays active/);
+  assert.equal(blink.cameraResponse,'original-linear');
+  const keys=blink.automatic.keysSecondsAndWeight;
+  assert.equal(keys.at(-1)[0],blink.automatic.cycleSeconds);
+  assert.equal(keys.at(-1)[1],0,'automatic blink finishes open');
+  assert(keys.some(([,weight])=>weight===100),'automatic blink has full closure');
+  assert.equal(facial.gaze.blinkMayShrinkIrisAssembly,false);
+  assert.equal(facial.gaze.initialTravelRadiusMetres,.0065);
+  assert.equal(facial.speech.visemes.length,15);
+  assert.equal(facial.expressions.manualMoodIsCameraEmotionTracking,false);
+  assert.equal(facial.validation.clientGateSeparateFromAuthoring,true);
+});

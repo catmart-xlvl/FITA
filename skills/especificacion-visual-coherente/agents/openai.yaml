@@ -1,0 +1,6 @@
+interface:
+  display_name: "Especificación visual coherente"
+  short_description: "Fija medidas y relaciones para crear y revisar vistas"
+  default_prompt: "Usa $especificacion-visual-coherente para fijar el diseño y sus relaciones espaciales antes de crear y revisar el resultado visual."
+policy:
+  allow_implicit_invocation: true

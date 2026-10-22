@@ -1,0 +1,19 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';
+import {Store,emptyProject} from '../server/storage.js';import {createApp} from '../server/app.js';
+async function setup(t){const root=await fs.mkdtemp(path.join(os.tmpdir(),'fita-purge-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));const store=new Store(path.join(root,'data'));await store.init();const p=emptyProject('Disposable fixture');await store.save(p);const asset=await store.asset(p,Buffer.from('shared content'),'glb','fixture');const work=path.join(root,'projects',p.id);await fs.mkdir(work,{recursive:true});await fs.writeFile(path.join(work,'own.txt'),'own workspace');const trash=await store.trash(p.id);return {root,store,p,asset,trash,work,dir:path.join(store.root,'.trash',trash.id)};}
+test('permanent deletion requires the exact confirmed trash identity and preserves active hardlink content',async t=>{
+ const e=await setup(t),other=emptyProject('Active project');await e.store.save(other);await fs.mkdir(path.join(e.store.root,other.id));const shared=path.join(e.store.root,other.id,'shared.glb');await fs.link(path.join(e.dir,'assets',e.asset.id),shared);
+ await assert.rejects(e.store.purge(e.trash.id,{confirm:false,projectId:e.p.id}),/CONFIRMATION/);await assert.rejects(e.store.purge(e.trash.id,{confirm:true,projectId:other.id}),/UNSAFE/);await fs.access(path.join(e.dir,'assets',e.asset.id));
+ assert.equal((await e.store.purge(e.trash.id,{confirm:true,projectId:e.p.id})).deleted,true);await assert.rejects(fs.access(e.dir),{code:'ENOENT'});await assert.rejects(fs.access(e.work),{code:'ENOENT'});assert.equal(await fs.readFile(shared,'utf8'),'shared content');assert.equal(e.store.get(other.id).name,'Active project');
+});
+test('busy projects, traversal and external junctions cannot be purged',async t=>{
+ const e=await setup(t);await assert.rejects(e.store.purge(e.trash.id,{confirm:true,projectId:e.p.id,busy:()=>true}),/BUSY/);await assert.rejects(e.store.purge('../outside',{confirm:true,projectId:e.p.id}),/UNSAFE/);
+ const outside=path.join(e.root,'outside');await fs.mkdir(outside);await fs.writeFile(path.join(outside,'keep'),'outside');await fs.symlink(outside,path.join(e.dir,'assets','external'),'junction');await assert.rejects(e.store.purge(e.trash.id,{confirm:true,projectId:e.p.id}),/UNSAFE/);assert.equal(await fs.readFile(path.join(outside,'keep'),'utf8'),'outside');await fs.access(path.join(e.dir,'project.json'));
+});
+test('partial deletion is visible, cannot be restored, and requires explicit confirmation to finish',async t=>{
+ const e=await setup(t);await fs.writeFile(path.join(e.dir,'purge.json'),JSON.stringify({schema:1,projectId:e.p.id}));assert.equal((await e.store.listTrash())[0].deletionPending,true);await assert.rejects(e.store.restore(e.trash.id),/FITA_TRASH_DELETE_FAILED/);await assert.rejects(e.store.purge(e.trash.id,{projectId:e.p.id}),/CONFIRMATION/);await e.store.purge(e.trash.id,{confirm:true,projectId:e.p.id});assert.equal((await e.store.listTrash()).length,0);
+});
+test('purge API refuses an unconfirmed request and exposes no destructive GET route',async t=>{
+ const e=await setup(t),{app}=await createApp({dataDir:e.store.root});const server=app.listen(0,'127.0.0.1');await new Promise(ok=>server.once('listening',ok));t.after(()=>new Promise(ok=>server.close(ok)));const base='http://127.0.0.1:'+server.address().port,token=(await(await fetch(base+'/api/session')).json()).token;
+ const r=await fetch(base+'/api/project-trash/'+e.trash.id,{method:'DELETE',headers:{'Content-Type':'application/json','x-workbench-token':token},body:JSON.stringify({projectId:e.p.id})});assert.equal(r.status,409);await fs.access(path.join(e.dir,'assets',e.asset.id));
+});

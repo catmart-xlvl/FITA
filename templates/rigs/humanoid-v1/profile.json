@@ -1,0 +1,1276 @@
+{
+  "schema": "workbench-humanoid-template/v1",
+  "id": "wb-humanoid-v1",
+  "version": 1,
+  "status": "prototype",
+  "heightMeters": 1.7,
+  "authoringSpace": {
+    "up": "+Z",
+    "forward": "-Y",
+    "units": "meters"
+  },
+  "bones": [
+    {
+      "name": "WB_Hips",
+      "parent": null,
+      "unityHumanBone": "Hips",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0,
+        0,
+        0.91
+      ],
+      "tail": [
+        0,
+        0,
+        1.02
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Spine",
+      "parent": "WB_Hips",
+      "unityHumanBone": "Spine",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0,
+        0,
+        1.02
+      ],
+      "tail": [
+        0,
+        0,
+        1.2
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Chest",
+      "parent": "WB_Spine",
+      "unityHumanBone": "Chest",
+      "requirementTier": "workbench-core",
+      "presence": "included",
+      "head": [
+        0,
+        0,
+        1.2
+      ],
+      "tail": [
+        0,
+        0,
+        1.4
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Neck",
+      "parent": "WB_Chest",
+      "unityHumanBone": "Neck",
+      "requirementTier": "workbench-core",
+      "presence": "included",
+      "head": [
+        0,
+        0,
+        1.4
+      ],
+      "tail": [
+        0,
+        0,
+        1.48
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Head",
+      "parent": "WB_Neck",
+      "unityHumanBone": "Head",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0,
+        0,
+        1.48
+      ],
+      "tail": [
+        0,
+        0,
+        1.7
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Eye_L",
+      "parent": "WB_Head",
+      "unityHumanBone": "LeftEye",
+      "requirementTier": "design-dependent",
+      "presence": "optional",
+      "head": [
+        0.032,
+        -0.06,
+        1.587
+      ],
+      "tail": [
+        0.032,
+        -0.085,
+        1.587
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Eye_R",
+      "parent": "WB_Head",
+      "unityHumanBone": "RightEye",
+      "requirementTier": "design-dependent",
+      "presence": "optional",
+      "head": [
+        -0.032,
+        -0.06,
+        1.587
+      ],
+      "tail": [
+        -0.032,
+        -0.085,
+        1.587
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Jaw",
+      "parent": "WB_Head",
+      "unityHumanBone": "Jaw",
+      "requirementTier": "design-dependent",
+      "presence": "optional",
+      "head": [
+        0,
+        -0.025,
+        1.52
+      ],
+      "tail": [
+        0,
+        -0.075,
+        1.5
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Shoulder_L",
+      "parent": "WB_Chest",
+      "unityHumanBone": "LeftShoulder",
+      "requirementTier": "workbench-core",
+      "presence": "included",
+      "head": [
+        0.045,
+        0,
+        1.385
+      ],
+      "tail": [
+        0.155,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_UpperArm_L",
+      "parent": "WB_Shoulder_L",
+      "unityHumanBone": "LeftUpperArm",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.155,
+        0,
+        1.385
+      ],
+      "tail": [
+        0.405,
+        0.018,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_LowerArm_L",
+      "parent": "WB_UpperArm_L",
+      "unityHumanBone": "LeftLowerArm",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.405,
+        0.018,
+        1.385
+      ],
+      "tail": [
+        0.645,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Hand_L",
+      "parent": "WB_LowerArm_L",
+      "unityHumanBone": "LeftHand",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.645,
+        0,
+        1.385
+      ],
+      "tail": [
+        0.725,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_01_L",
+      "parent": "WB_Hand_L",
+      "unityHumanBone": "LeftThumbProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.68,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        0.7020000000000001,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_02_L",
+      "parent": "WB_Thumb_01_L",
+      "unityHumanBone": "LeftThumbIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.7020000000000001,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        0.7240000000000001,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_03_L",
+      "parent": "WB_Thumb_02_L",
+      "unityHumanBone": "LeftThumbDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.7240000000000001,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        0.746,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_01_L",
+      "parent": "WB_Hand_L",
+      "unityHumanBone": "LeftIndexProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.724,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        0.749,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_02_L",
+      "parent": "WB_Index_01_L",
+      "unityHumanBone": "LeftIndexIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.749,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        0.774,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_03_L",
+      "parent": "WB_Index_02_L",
+      "unityHumanBone": "LeftIndexDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.774,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        0.7989999999999999,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_01_L",
+      "parent": "WB_Hand_L",
+      "unityHumanBone": "LeftMiddleProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.724,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        0.752,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_02_L",
+      "parent": "WB_Middle_01_L",
+      "unityHumanBone": "LeftMiddleIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.752,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        0.78,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_03_L",
+      "parent": "WB_Middle_02_L",
+      "unityHumanBone": "LeftMiddleDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.78,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        0.8079999999999999,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_01_L",
+      "parent": "WB_Hand_L",
+      "unityHumanBone": "LeftRingProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.724,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        0.75,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_02_L",
+      "parent": "WB_Ring_01_L",
+      "unityHumanBone": "LeftRingIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.75,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        0.776,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_03_L",
+      "parent": "WB_Ring_02_L",
+      "unityHumanBone": "LeftRingDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.776,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        0.8019999999999999,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_01_L",
+      "parent": "WB_Hand_L",
+      "unityHumanBone": "LeftLittleProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.724,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        0.745,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_02_L",
+      "parent": "WB_Little_01_L",
+      "unityHumanBone": "LeftLittleIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.745,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        0.766,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_03_L",
+      "parent": "WB_Little_02_L",
+      "unityHumanBone": "LeftLittleDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.766,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        0.7869999999999999,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_UpperLeg_L",
+      "parent": "WB_Hips",
+      "unityHumanBone": "LeftUpperLeg",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.085,
+        0,
+        0.91
+      ],
+      "tail": [
+        0.095,
+        -0.025,
+        0.49
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_LowerLeg_L",
+      "parent": "WB_UpperLeg_L",
+      "unityHumanBone": "LeftLowerLeg",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.095,
+        -0.025,
+        0.49
+      ],
+      "tail": [
+        0.095,
+        0,
+        0.085
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Foot_L",
+      "parent": "WB_LowerLeg_L",
+      "unityHumanBone": "LeftFoot",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        0.095,
+        0,
+        0.085
+      ],
+      "tail": [
+        0.095,
+        -0.115,
+        0.04
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Toes_L",
+      "parent": "WB_Foot_L",
+      "unityHumanBone": "LeftToes",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        0.095,
+        -0.115,
+        0.04
+      ],
+      "tail": [
+        0.095,
+        -0.185,
+        0.035
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Shoulder_R",
+      "parent": "WB_Chest",
+      "unityHumanBone": "RightShoulder",
+      "requirementTier": "workbench-core",
+      "presence": "included",
+      "head": [
+        -0.045,
+        0,
+        1.385
+      ],
+      "tail": [
+        -0.155,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_UpperArm_R",
+      "parent": "WB_Shoulder_R",
+      "unityHumanBone": "RightUpperArm",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.155,
+        0,
+        1.385
+      ],
+      "tail": [
+        -0.405,
+        0.018,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_LowerArm_R",
+      "parent": "WB_UpperArm_R",
+      "unityHumanBone": "RightLowerArm",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.405,
+        0.018,
+        1.385
+      ],
+      "tail": [
+        -0.645,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Hand_R",
+      "parent": "WB_LowerArm_R",
+      "unityHumanBone": "RightHand",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.645,
+        0,
+        1.385
+      ],
+      "tail": [
+        -0.725,
+        0,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_01_R",
+      "parent": "WB_Hand_R",
+      "unityHumanBone": "RightThumbProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.68,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        -0.7020000000000001,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_02_R",
+      "parent": "WB_Thumb_01_R",
+      "unityHumanBone": "RightThumbIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.7020000000000001,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        -0.7240000000000001,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Thumb_03_R",
+      "parent": "WB_Thumb_02_R",
+      "unityHumanBone": "RightThumbDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.7240000000000001,
+        -0.047,
+        1.385
+      ],
+      "tail": [
+        -0.746,
+        -0.047,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_01_R",
+      "parent": "WB_Hand_R",
+      "unityHumanBone": "RightIndexProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.724,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        -0.749,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_02_R",
+      "parent": "WB_Index_01_R",
+      "unityHumanBone": "RightIndexIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.749,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        -0.774,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Index_03_R",
+      "parent": "WB_Index_02_R",
+      "unityHumanBone": "RightIndexDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.774,
+        -0.032,
+        1.385
+      ],
+      "tail": [
+        -0.7989999999999999,
+        -0.032,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_01_R",
+      "parent": "WB_Hand_R",
+      "unityHumanBone": "RightMiddleProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.724,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        -0.752,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_02_R",
+      "parent": "WB_Middle_01_R",
+      "unityHumanBone": "RightMiddleIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.752,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        -0.78,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Middle_03_R",
+      "parent": "WB_Middle_02_R",
+      "unityHumanBone": "RightMiddleDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.78,
+        -0.011,
+        1.385
+      ],
+      "tail": [
+        -0.8079999999999999,
+        -0.011,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_01_R",
+      "parent": "WB_Hand_R",
+      "unityHumanBone": "RightRingProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.724,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        -0.75,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_02_R",
+      "parent": "WB_Ring_01_R",
+      "unityHumanBone": "RightRingIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.75,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        -0.776,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Ring_03_R",
+      "parent": "WB_Ring_02_R",
+      "unityHumanBone": "RightRingDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.776,
+        0.013,
+        1.385
+      ],
+      "tail": [
+        -0.8019999999999999,
+        0.013,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_01_R",
+      "parent": "WB_Hand_R",
+      "unityHumanBone": "RightLittleProximal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.724,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        -0.745,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_02_R",
+      "parent": "WB_Little_01_R",
+      "unityHumanBone": "RightLittleIntermediate",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.745,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        -0.766,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Little_03_R",
+      "parent": "WB_Little_02_R",
+      "unityHumanBone": "RightLittleDistal",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.766,
+        0.034,
+        1.385
+      ],
+      "tail": [
+        -0.7869999999999999,
+        0.034,
+        1.385
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_UpperLeg_R",
+      "parent": "WB_Hips",
+      "unityHumanBone": "RightUpperLeg",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.085,
+        0,
+        0.91
+      ],
+      "tail": [
+        -0.095,
+        -0.025,
+        0.49
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_LowerLeg_R",
+      "parent": "WB_UpperLeg_R",
+      "unityHumanBone": "RightLowerLeg",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.095,
+        -0.025,
+        0.49
+      ],
+      "tail": [
+        -0.095,
+        0,
+        0.085
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Foot_R",
+      "parent": "WB_LowerLeg_R",
+      "unityHumanBone": "RightFoot",
+      "requirementTier": "unity-required",
+      "presence": "included",
+      "head": [
+        -0.095,
+        0,
+        0.085
+      ],
+      "tail": [
+        -0.095,
+        -0.115,
+        0.04
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_Toes_R",
+      "parent": "WB_Foot_R",
+      "unityHumanBone": "RightToes",
+      "requirementTier": "workbench-recommended",
+      "presence": "included",
+      "head": [
+        -0.095,
+        -0.115,
+        0.04
+      ],
+      "tail": [
+        -0.095,
+        -0.185,
+        0.035
+      ],
+      "deform": true,
+      "role": "humanoid"
+    },
+    {
+      "name": "WB_UpperArmTwist_L",
+      "parent": "WB_Shoulder_L",
+      "unityHumanBone": null,
+      "head": [
+        0.22999999999999998,
+        0.005399999999999999,
+        1.385
+      ],
+      "tail": [
+        0.39249999999999996,
+        0.017099999999999997,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_UpperLegTwist_L",
+      "parent": "WB_Hips",
+      "unityHumanBone": null,
+      "head": [
+        0.08800000000000001,
+        -0.0075,
+        0.784
+      ],
+      "tail": [
+        0.0945,
+        -0.02375,
+        0.511
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_LowerArmTwist_L",
+      "parent": "WB_LowerArm_L",
+      "unityHumanBone": null,
+      "head": [
+        0.47700000000000004,
+        0.0126,
+        1.385
+      ],
+      "tail": [
+        0.633,
+        0.0009000000000000015,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_LowerArmTwistWrist_L",
+      "parent": "WB_LowerArm_L",
+      "unityHumanBone": null,
+      "head": [
+        0.561,
+        0.006299999999999998,
+        1.385
+      ],
+      "tail": [
+        0.633,
+        0.0009000000000000015,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_UpperArmTwist_R",
+      "parent": "WB_Shoulder_R",
+      "unityHumanBone": null,
+      "head": [
+        -0.22999999999999998,
+        0.005399999999999999,
+        1.385
+      ],
+      "tail": [
+        -0.39249999999999996,
+        0.017099999999999997,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_UpperLegTwist_R",
+      "parent": "WB_Hips",
+      "unityHumanBone": null,
+      "head": [
+        -0.08800000000000001,
+        -0.0075,
+        0.784
+      ],
+      "tail": [
+        -0.0945,
+        -0.02375,
+        0.511
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_LowerArmTwist_R",
+      "parent": "WB_LowerArm_R",
+      "unityHumanBone": null,
+      "head": [
+        -0.47700000000000004,
+        0.0126,
+        1.385
+      ],
+      "tail": [
+        -0.633,
+        0.0009000000000000015,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    },
+    {
+      "name": "WB_LowerArmTwistWrist_R",
+      "parent": "WB_LowerArm_R",
+      "unityHumanBone": null,
+      "head": [
+        -0.561,
+        0.006299999999999998,
+        1.385
+      ],
+      "tail": [
+        -0.633,
+        0.0009000000000000015,
+        1.385
+      ],
+      "deform": true,
+      "role": "twist",
+      "presence": "included",
+      "requirementTier": "workbench-auxiliary"
+    }
+  ],
+  "twistRecipes": [
+    {
+      "bone": "WB_UpperArmTwist_L",
+      "source": "WB_UpperArm_L",
+      "type": "swing-and-reduced-twist",
+      "fraction": 0.5,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_UpperLegTwist_L",
+      "source": "WB_UpperLeg_L",
+      "type": "swing-and-reduced-twist",
+      "fraction": 0.5,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_LowerArmTwist_L",
+      "source": "WB_Hand_L",
+      "type": "axial-twist",
+      "fraction": 0.35,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_LowerArmTwistWrist_L",
+      "source": "WB_Hand_L",
+      "type": "axial-twist",
+      "fraction": 0.75,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_UpperArmTwist_R",
+      "source": "WB_UpperArm_R",
+      "type": "swing-and-reduced-twist",
+      "fraction": 0.5,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_UpperLegTwist_R",
+      "source": "WB_UpperLeg_R",
+      "type": "swing-and-reduced-twist",
+      "fraction": 0.5,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_LowerArmTwist_R",
+      "source": "WB_Hand_R",
+      "type": "axial-twist",
+      "fraction": 0.35,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    },
+    {
+      "bone": "WB_LowerArmTwistWrist_R",
+      "source": "WB_Hand_R",
+      "type": "axial-twist",
+      "fraction": 0.75,
+      "axis": "local-Y",
+      "status": "prototype-revalidate-after-fitting"
+    }
+  ],
+  "skinning": {
+    "maxInfluences": 4,
+    "normalized": true
+  },
+  "secondaryMotion": {
+    "policy": "per-character chains",
+    "attachments": [
+      "WB_Head",
+      "WB_Chest",
+      "WB_Hips"
+    ]
+  },
+  "acceptance": {
+    "weights": "not-generated",
+    "deformation": "not-tested",
+    "unity": "not-tested",
+    "trackers": "not-tested"
+  }
+}

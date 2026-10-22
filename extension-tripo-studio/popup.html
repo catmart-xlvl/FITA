@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tripo Studio bridge</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header><div class="row"><span class="eyebrow" data-i18n="brand">FITA</span><select id="language" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ja">日本語</option></select></div><h1 data-i18n="heading">Connect Tripo Studio</h1><p data-i18n="intro">Read-only access to the tab you select. No generation or credit use.</p></header>
+  <section><label for="extension-id" data-i18n="step1">1. Copy this ID into FITA settings</label><input id="extension-id" readonly spellcheck="false"><button id="open" class="secondary" data-i18n="open">Open Tripo Studio</button><small data-i18n="openHint">Opening the page does not connect or verify your account.</small></section>
+  <section><label for="code" data-i18n="step2">2. Enter the code shown in FITA</label><div class="row"><input id="code" inputmode="numeric" maxlength="8" placeholder="8 digits" autocomplete="off"><button id="pair" data-i18n="pair">Pair</button></div></section>
+  <section><label for="tabs" data-i18n="step3">3. Authorize one tab for read-only access</label><select id="tabs" aria-label="Tripo Studio tab"></select><label class="automation-choice"><input id="automation" type="checkbox"><span data-i18n="automationConsent">Allow explicit project commands on this tab</span></label><small data-i18n="automationHint">Optional: send approved views, confirm the displayed cost in FITA before Generate, and export the task you confirm. Never submits automatically.</small><button id="connect" data-i18n="connect">Connect selected tab</button><small data-i18n="privacy">Shares the tab title, domain and control counts with localhost. Does not read cookies, passwords, project text or field values.</small></section>
+  <p id="status" role="status" aria-live="polite">Checking extension…</p>
+  <button id="reload-extension" class="secondary" hidden data-i18n="reloadExtension">Reload extension</button>
+  <div class="row"><button id="refresh" class="secondary" data-i18n="refresh">Refresh status</button><button id="disconnect" class="secondary" data-i18n="disconnect">Revoke connection</button></div>
+  <section><button id="diagnostics" class="secondary" data-i18n="diagnostics">Inspect uploaded views</button><button id="save-diagnostics" class="secondary" data-i18n="saveDiagnostic">Save layout diagnostic</button><small data-i18n="diagnosticHint">Read-only report of upload slots, file hashes and visible controls. Does not upload or generate.</small><pre id="diagnostic-report" hidden></pre></section>
+  <details class="permissions"><summary data-i18n="permissionsTitle">Permissions and your data</summary><p data-i18n="permissionsBody">Access is limited to Tripo Studio and local FITA. Downloads identifies requested exports; content settings enables multiple downloads only for Studio. Pairing is stored for this browser session. Language and export receipts stay on this computer.</p></details>
+  <p class="limit" data-i18n="limit">Community integration, not an official Tripo extension. Your session stays in your browser. Revoke the connection at any time.</p>
+  <small class="version">FITA · 0.2.38</small>
+  <script src="popup.js" type="module"></script>
+</body></html>

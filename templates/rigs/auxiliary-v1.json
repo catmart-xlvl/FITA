@@ -1,0 +1,311 @@
+{
+  "schema": "workbench-auxiliary-profile/v1",
+  "id": "humanoid-support-v2",
+  "scope": "Fixed body support roles for ordinary two-arm, two-leg humanoids; character-specific hair and clothing chains are fitted after these roles and before final weight refinement.",
+  "sides": [
+    "L",
+    "R"
+  ],
+  "requiredBonesPerSide": [
+    {
+      "name": "WB_Aux_UpperArmTwist1_{side}",
+      "kind": "twist",
+      "parentRole": "Shoulder_{side}",
+      "segment": [
+        "UpperArm_{side}",
+        "LowerArm_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperArm_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.25,
+      "weightCenterFraction": 0.16666666666666666
+    },
+    {
+      "name": "WB_Aux_UpperArmTwist2_{side}",
+      "kind": "twist",
+      "parentRole": "Shoulder_{side}",
+      "segment": [
+        "UpperArm_{side}",
+        "LowerArm_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperArm_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.5,
+      "weightCenterFraction": 0.5
+    },
+    {
+      "name": "WB_Aux_UpperArmTwist3_{side}",
+      "kind": "twist",
+      "parentRole": "Shoulder_{side}",
+      "segment": [
+        "UpperArm_{side}",
+        "LowerArm_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperArm_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.75,
+      "weightCenterFraction": 0.8333333333333334
+    },
+    {
+      "name": "WB_Aux_LowerArmTwist1_{side}",
+      "kind": "twist",
+      "parentRole": "LowerArm_{side}",
+      "segment": [
+        "LowerArm_{side}",
+        "Hand_{side}"
+      ],
+      "headFraction": 0.0,
+      "tailFraction": 0.3333333333333333,
+      "sourceRole": "Hand_{side}",
+      "mode": "twist",
+      "fraction": 0.25,
+      "weightCenterFraction": 0.16666666666666666
+    },
+    {
+      "name": "WB_Aux_LowerArmTwist2_{side}",
+      "kind": "twist",
+      "parentRole": "LowerArm_{side}",
+      "segment": [
+        "LowerArm_{side}",
+        "Hand_{side}"
+      ],
+      "headFraction": 0.3333333333333333,
+      "tailFraction": 0.6666666666666666,
+      "sourceRole": "Hand_{side}",
+      "mode": "twist",
+      "fraction": 0.5,
+      "weightCenterFraction": 0.5
+    },
+    {
+      "name": "WB_Aux_LowerArmTwist3_{side}",
+      "kind": "twist",
+      "parentRole": "LowerArm_{side}",
+      "segment": [
+        "LowerArm_{side}",
+        "Hand_{side}"
+      ],
+      "headFraction": 0.6666666666666666,
+      "tailFraction": 1.0,
+      "sourceRole": "Hand_{side}",
+      "mode": "twist",
+      "fraction": 0.75,
+      "weightCenterFraction": 0.8333333333333334
+    },
+    {
+      "name": "WB_Aux_UpperLegTwist1_{side}",
+      "kind": "twist",
+      "parentRole": "Hips",
+      "segment": [
+        "UpperLeg_{side}",
+        "LowerLeg_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperLeg_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.25,
+      "weightCenterFraction": 0.16666666666666666
+    },
+    {
+      "name": "WB_Aux_UpperLegTwist2_{side}",
+      "kind": "twist",
+      "parentRole": "Hips",
+      "segment": [
+        "UpperLeg_{side}",
+        "LowerLeg_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperLeg_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.5,
+      "weightCenterFraction": 0.5
+    },
+    {
+      "name": "WB_Aux_UpperLegTwist3_{side}",
+      "kind": "twist",
+      "parentRole": "Hips",
+      "segment": [
+        "UpperLeg_{side}",
+        "LowerLeg_{side}"
+      ],
+      "headFraction": 0,
+      "tailFraction": 1,
+      "sourceRole": "UpperLeg_{side}",
+      "mode": "swing-twist",
+      "fraction": 0.75,
+      "weightCenterFraction": 0.8333333333333334
+    },
+    {
+      "name": "WB_Aux_ElbowVolume_{side}",
+      "kind": "bone-corrective",
+      "parentRole": "UpperArm_{side}",
+      "jointRole": "LowerArm_{side}",
+      "segment": [
+        "LowerArm_{side}",
+        "Hand_{side}"
+      ],
+      "tailLengthFraction": 0.12,
+      "activationDegrees": [
+        35,
+        110
+      ],
+      "maximumOutwardTranslationFraction": 0.025,
+      "influenceRadiusFraction": 0.12
+    },
+    {
+      "name": "WB_Aux_KneeVolume_{side}",
+      "kind": "bone-corrective",
+      "parentRole": "UpperLeg_{side}",
+      "jointRole": "LowerLeg_{side}",
+      "segment": [
+        "LowerLeg_{side}",
+        "Foot_{side}"
+      ],
+      "tailLengthFraction": 0.12,
+      "activationDegrees": [
+        35,
+        110
+      ],
+      "maximumOutwardTranslationFraction": 0.025,
+      "influenceRadiusFraction": 0.12
+    },
+    {
+      "name": "WB_Physics_Breast_{side}",
+      "kind": "secondary",
+      "region": "breast",
+      "parentRole": "Chest",
+      "placement": "Fit a same-side tissue center and outward rest endpoint from the original surface; keep the medial boundary and attachment to the torso fixed. Never use global left/right alone to classify vertices. All humanoids retain this role, even with subtle influence."
+    },
+    {
+      "name": "WB_Physics_Glute_{side}",
+      "kind": "secondary",
+      "region": "glute",
+      "parentRole": "Hips",
+      "placement": "Fit a same-side tissue center and outward rest endpoint from the original surface; keep the medial boundary and attachment to the torso fixed. Never use global left/right alone to classify vertices. All humanoids retain this role, even with subtle influence."
+    }
+  ],
+  "rules": [
+    "All 26 fixed body support roles are required: thirteen per side. Reuse a verified equivalent using runtime.supportBones[canonicalRole]=actualBoneName, never duplicate it. An anatomical donor bone is not a support-role equivalent.",
+    "Transfer the full donor skeleton and starting weights to the connected ORIGINAL first; add fixed body bones, then complete character-specific hair/clothing chains; only then refine all weight maps.",
+    "Keep every donor bone, parent and rest joint position. Added bones are branches. An existing equivalent must satisfy the required parent without reparenting the donor; otherwise report the conflict.",
+    "Twist fractions are 0.25, 0.5 and 0.75 along each upper arm, forearm and thigh. Swing-following helpers share the anatomical pivot; weights form overlapping longitudinal zones, not three identical full-limb masks. Target axes are measured in target REST LOCAL space.",
+    "Resolve Shoulder to Chest/UpperChest/Spine only when that donor role is absent; resolve Chest to UpperChest/Spine when absent. Record the resolved attachment. Do not invent anatomical bones.",
+    "Measure signed joint flexion and convex direction from a test bend; fit the existing elbow/knee volume recipe in the correct parent/source local frames. Do not use new shape keys.",
+    "Secondary bones are explicitly declared in runtime.secondary with kind, bones in parent-to-child order, attachment, original mesh names, region description and simulated:false. They inherit parent motion in the preview; this is not a PhysBones simulation.",
+    "Do not add Blender-only behavior that the viewer cannot reproduce. Every twist and volume helper needs its supported runtime recipe. Physics-ready bones must not have fake zero-motion twist recipes.",
+    "Never delete, merge or renumber source vertices or change UVs, materials, hair normals or approved morphs while building the rig."
+  ],
+  "weightCleanup": {
+    "maxInfluences": 4,
+    "normalize": true,
+    "crossLimb": "Identify limb ownership from corresponding donor parts, anatomy and mesh connectivity, not x-sign or nearest joint alone. In unambiguous limbs remove opposite-leg/opposite-arm influences including their auxiliaries and redistribute to allowed same-side bones. Keep a deliberate central pelvis/crotch transition and center-spanning garments. Test each side alone and measure unintended opposite-side displacement.",
+    "shoulders": "Smooth the transition locally across upper arm, shoulder and chest, retaining chest/torso support in the axilla. Test arm elevation at 0, 45, 90 and 120 degrees and do not globally smooth unrelated face, hair, hand or clothing regions.",
+    "helpers": "Redistribute existing regional influence to the specified helpers using a smooth longitudinal falloff for twist branches and a local convex-joint falloff for volume helpers. Keep actual weighted vertices for each helper.",
+    "order": [
+      "audit transferred weights by region",
+      "remove cross-limb leakage",
+      "distribute fixed support weights",
+      "paint tissue and hair/clothing chains",
+      "local boundary-aware smoothing",
+      "prune and normalize",
+      "check poses and repair"
+    ],
+    "smoothRegions": "Use connected-surface neighborhoods and semantic masks. Smooth shoulder/axilla/chest, elbow, hip/groin/glute attachment, knee and ankle transitions locally. Use overlapping smooth ramps for twist zones, protected attachment bands for tissue and root-to-tip blends for chains. Preserve intentional creases and different layers; never blur weights by Euclidean proximity across legs, fingers, loose fabric or hair.",
+    "protectedRegions": "Preserve face pieces as a coordinated Head attachment in this body stage. Fingers have individual ownership with local knuckle blends; soles and rigid accessories retain coherent support. Breast and glute influence tapers to zero at medial and torso attachment boundaries; avoid dragging opposite tissue, ribs, pelvis or shoulders.",
+    "budget": "Prune to four influences only after redistribution, using regional ownership and preserving the principal supporting bone; normalize after each cleanup pass. Recheck deformation after pruning. Source UV duplicates must have identical named-bone weights.",
+    "evidence": "Provide weightAudit in report.json with before/after metrics, region ownership decisions, paired one-side pose checks, graded shoulder/elbow/knee/twist poses and relative paths to evidence. A structural pass is not a claim of professional artistic quality."
+  },
+  "deferred": [
+    "New body corrective shape keys",
+    "Face rig, expressions and visemes (separate section)",
+    "Physics simulation/colliders and Unity/VRChat destination setup"
+  ],
+  "acceptance": [
+    "All 26 fixed roles present exactly once and actually weighted",
+    "Twist/volume recipes match fixed profile and measured local frames",
+    "Hair/clothing inventory complete with fitted chains or justified body-following regions",
+    "No cross-limb movement outside intentional central transitions",
+    "Normalized weights, maximum four influences, no unweighted vertices or conflicting UV-seam weights",
+    "Rest geometry, source identities, UVs, textures, normals and donor hierarchy/joints preserved",
+    "Evidence reviewed for both sides, joints, tissue attachments and secondary chains; unresolved defects reported"
+  ],
+  "revision": 2,
+  "secondaryChains": {
+    "order": [
+      "fixed-body-support",
+      "hair-and-clothing-chains",
+      "weight-refinement",
+      "deformation-review"
+    ],
+    "hair": "Inspect scalp attachments, bangs, side locks, back masses and ponytails. Add independent chains only for masses that should move independently; roots follow Head. Trace each chain through its own volume; protect scalp and face. Close or overlapping locks are not automatic neighbors. Do not copy a fixed hairstyle.",
+    "clothing": "Classify fitted cloth, loose hems/panels, skirts, straps and rigid accessories. Fitted cloth follows the underlying body; loose regions receive chains anchored to the relevant torso/pelvis/limb. A skirt may need radial chains and body/chain blending near the waistband; do not bind the entire skirt independently to the nearest leg. Rigid buckles must not be globally smoothed.",
+    "inventory": "Report every original hair/clothing mesh or named subregion with decision chain or follows-body and reason. No hair or loose garment may be silently skipped. Record actual chain names and attachment bones. Keep bones within their assigned geometry region.",
+    "limits": "Fit chain density to curvature and deformation need, not every strand/triangle. Maximum 128 declared secondary chains and 256 secondary bones; if exceeded, report rather than silently truncate.",
+    "simulation": "Create the bones and weights now. PhysBones components, colliders, runtime limits and collision groups are configured and tested in the later destination stage."
+  },
+  "reviewPoses": [
+    {
+      "test": "isolated-arm",
+      "side": "L"
+    },
+    {
+      "test": "isolated-arm",
+      "side": "R"
+    },
+    {
+      "test": "isolated-leg",
+      "side": "L"
+    },
+    {
+      "test": "isolated-leg",
+      "side": "R"
+    },
+    {
+      "test": "shoulder-elevation",
+      "side": "L"
+    },
+    {
+      "test": "shoulder-elevation",
+      "side": "R"
+    },
+    {
+      "test": "elbow-bend",
+      "side": "L"
+    },
+    {
+      "test": "elbow-bend",
+      "side": "R"
+    },
+    {
+      "test": "knee-bend",
+      "side": "L"
+    },
+    {
+      "test": "knee-bend",
+      "side": "R"
+    },
+    {
+      "test": "distributed-twist",
+      "side": "L"
+    },
+    {
+      "test": "distributed-twist",
+      "side": "R"
+    },
+    {
+      "test": "hip-squat-ankle",
+      "side": "both"
+    },
+    {
+      "test": "secondary-attachments",
+      "side": "both"
+    }
+  ]
+}

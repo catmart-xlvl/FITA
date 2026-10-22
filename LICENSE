@@ -1,0 +1,60 @@
+FITA Usage License
+Version 1.0 — 22 October 2026
+
+Copyright (c) 2026 catmart-xlvl. All rights reserved except as expressly granted below.
+
+1. Scope
+
+This license applies only to the original FITA program code, documentation and
+original assets controlled by catmart-xlvl (the "FITA Software"). Third-party
+components and user content are excluded from this definition.
+
+2. Permission to use
+
+You may download, install and run official, unmodified versions of the FITA
+Software for your own personal or commercial use. You may make the copies
+reasonably necessary for that installation, use and backup, and compile official,
+unmodified source code for that purpose. You may use supported configuration
+options and install official updates. Keep the applicable copyright and license
+notices with your copies.
+
+3. Modification and redistribution reserved
+
+Except for the permissions above, rights granted by applicable law, the
+third-party exceptions below, or prior written permission from catmart-xlvl,
+you may not modify the FITA Software, create derivative versions of it, or
+redistribute, sublicense or sell copies of its source code, compiled program,
+documentation or original assets. All rights not expressly granted are reserved.
+This is a proprietary usage license, not an open-source license.
+
+4. User projects and outputs
+
+This license does not claim ownership of, or impose new modification,
+redistribution or commercial-use restrictions on, your models, artwork, textures,
+projects or other outputs created or processed with FITA. Rights in third-party
+inputs, services and content remain governed by their own applicable terms.
+
+5. Third-party rights take precedence for their components
+
+Third-party code, libraries, runtimes and assets retain their own licenses and
+copyright notices. See THIRD_PARTY_NOTICES.md, THIRD_PARTY_LICENSES.txt and the
+licenses accompanying the components. This license does not replace those terms
+or restrict rights they grant, including use, modification and redistribution.
+Nothing here restricts replacing or relinking third-party libraries, or reverse
+engineering to debug modifications to them, where their licenses or applicable
+law permit or require it. Mandatory rights under applicable law are preserved.
+
+6. Hosting-platform rights
+
+Nothing here overrides limited viewing or repository-forking rights that the
+rights holder grants through the applicable terms of a hosting platform on which
+the FITA Software is made available. Those platform-specific rights do not by
+themselves grant an unrestricted license to modify or redistribute FITA-specific
+software outside those terms. Source visibility is not an open-source grant.
+
+7. No warranty
+
+To the extent permitted by applicable law, the FITA Software is provided "AS IS",
+without warranties of any kind, and its rights holder is not liable for damages
+arising from its use. This clause does not exclude rights or liabilities that
+applicable law does not allow to be excluded.

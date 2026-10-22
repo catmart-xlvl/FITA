@@ -1,0 +1,21 @@
+.segmentation-panel{border-top:1px solid var(--border,#393f47);padding-top:18px;margin:18px 0 22px;font-size:12px;line-height:1.6}
+.segmentation-panel p{margin:10px 0;color:var(--muted,#bcb1b9)}
+.seg-heading{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.seg-heading h3{font-size:13px;margin:0;color:var(--text,#e6e7e8)}
+.seg-number{border:1px solid #3a5972;color:#ffffff;padding:1px 6px;font-size:10px;border-radius:4px}.seg-badge{margin-left:auto;font-size:10px;color:#ffffff;background:#303c4655;border-radius:4px;padding:2px 6px}
+.segmentation-panel small{display:block;font-size:10px;color:var(--muted,#bcb1b9)}.segmentation-panel .button{margin:6px 0;white-space:normal;line-height:1.5}
+.seg-delivery,.seg-approval,.seg-budget{margin-top:14px;padding:12px;border:1px solid #3d4652;border-radius:7px;background:#23242855}
+.seg-part-totals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.seg-part-totals>div{padding:10px;border:1px solid #3b4249;border-radius:6px}.seg-part-totals span{display:block;font-size:11px;color:var(--muted,#bcb1b9)}
+.seg-help{font-size:11px}.segmentation-panel .seg-warning{color:#edc69b}.seg-preview-controls{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.seg-preview-controls button{padding:5px 8px;font-size:10px;border:1px solid #44515f;border-radius:4px;background:transparent;color:inherit}.seg-preview-controls button.selected{background:#3c4650;color:#fff}
+.seg-group{padding:12px;margin:9px 0;border:1px solid #463c43;border-radius:7px;background:#1b1c2066}.seg-group.selected{border-color:#7791a6}.seg-group-heading{display:flex;align-items:center;gap:7px}.seg-group-heading strong{overflow-wrap:anywhere}.seg-group-heading span{font-size:10px;color:#a8abb0;margin-left:auto}
+.segmentation-panel input[type=checkbox]{width:auto;flex-shrink:0;accent-color:#5b94c2}.segmentation-panel label{display:block;margin:9px 0}.segmentation-panel label:has(input[type=checkbox]){display:flex;align-items:flex-start;gap:8px}.segmentation-panel select,.segmentation-panel input[type=number],.seg-merge input{width:100%;margin-top:5px;padding:7px;background:#1c1d20;color:#ffffff;border:1px solid #3d4d5b;border-radius:4px}
+.segmentation-panel details{margin:9px 0}.segmentation-panel summary{cursor:pointer;color:#ffffff}.seg-reference-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.seg-reference-grid img{width:100%;aspect-ratio:1;object-fit:contain;background:#131417;border-radius:4px}
+.seg-budget table{width:100%;border-collapse:collapse;margin:14px 0;font-size:11px}.seg-budget th,.seg-budget td{text-align:left;padding:8px 3px;border-bottom:1px solid #3b4249}.seg-budget th:first-child{max-width:120px;overflow-wrap:anywhere}.seg-budget strong{color:#ffffff}.seg-run{margin-top:14px;border-top:1px solid #3b4249;padding-top:10px}
+.whole-part-texture{margin:16px 0;border-top:1px solid #37404a;padding-top:12px}.whole-part-texture>summary{cursor:pointer;font-size:12px;font-weight:600;color:#abafb3}
+.seg-generate-price{display:flex;align-items:center;gap:12px;justify-content:space-between}.seg-generate-price .button{flex:0 1 auto}.seg-generate-price strong{text-align:right;font-size:12px;font-variant-numeric:tabular-nums}.seg-price-parts{display:flex;flex-wrap:wrap;gap:3px 14px;font-size:10px;color:var(--muted,#bcb1b9);margin:0 0 8px}
+.seg-cost-help{border:0;background:none;padding:4px 0;color:var(--muted,#bcb1b9);font:inherit;font-size:11px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.seg-cost-help:hover{color:var(--text,#e6e7e8)}.seg-cost-help:focus-visible{outline:2px solid #7791a6;outline-offset:3px}
+
+.seg-codex-next{margin:14px 0;padding:16px;border:2px solid var(--accent,#7791a6);border-radius:9px;background:var(--surface,#232428)}
+.seg-codex-next>strong{display:block;font-size:15px;color:var(--text,#fff)}
+.segmentation-panel .seg-codex-next p{color:var(--text,#eee);font-size:12px}
+.seg-codex-next blockquote{margin:12px 0;padding:10px;border-left:3px solid var(--accent,#7791a6);background:#ffffff0a;user-select:all;color:var(--text,#fff)}
+.seg-analysis-fields{border:0;margin:20px 0 0;padding:0;min-width:0}.seg-analysis-fields:disabled .part-switch{opacity:.55}.seg-texture-wait{margin-top:24px}.analysis-wait{font-size:12px}.analysis-wait>span{letter-spacing:2px}

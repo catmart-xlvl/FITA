@@ -1,0 +1,752 @@
+{
+  "schema": "fita-vrchat-pc-reference/v1",
+  "revision": "2026-10-20-review11-facial-skin-v1",
+  "purpose": "Adaptive PC references from the LastUpdates and ReferenceAvatar pilots; preserve each approved character palette. Required skin controls are a destination-authoring contract, not an executed importer.",
+  "authority": {
+    "guide": "VRCHAT_PC_HANDOFF.md",
+    "stage": "Export for VRChat after approved Rigging and facial authoring",
+    "sourceWeights": "Keep approved connected-source weights; repair them in Rigging when necessary.",
+    "destinationChanges": "Unity Humanoid calibration, fitted runtime adapters, materials, PhysBones and descriptor bindings belong to destination preparation.",
+    "credentialsAndPublication": "User handles sign-in and terms; publication requires explicit authorization.",
+    "storage": "Use a real user project directory outside application-package caches. Verify the physical destination, not only a junction or virtualized path.",
+    "projectIsolation": {
+      "policy": "one-unity-project-per-character",
+      "identity": "Bind the FITA manifest projectId to an exclusive physical Unity directory and record it locally. Reuse only verified same-character projects; same-character versions may share that project.",
+      "concurrency": "Resolve junctions and check current editors/imports/builds before writing. Do not open the same project twice, delete active locks or interrupt another task. Separate characters may have separate projects open concurrently.",
+      "sharedOutputs": "Use character-and-revision-specific scenes, temporary files and local test-avatar build names, including VRChat shared output folders. Verify blueprint ownership before an authorized upload.",
+      "evidence": "Record verified project identity, physical path, source revision and isolation checks in the unity-project evidence. Guidance is not an automatic lock or proof of runtime isolation."
+    }
+  },
+  "testedTools": {
+    "Unity": "2022.3.22f1",
+    "VRChatAvatarsAndBase": "3.10.5",
+    "PoiyomiToon": "10.0.25",
+    "ThryEditor": "2.74.3",
+    "renderPipeline": "Built-in, Windows 64-bit",
+    "rule": "Historical tested versions. Recheck official VRChat compatibility and package sources before future installations; do not upgrade a working user project silently. Poiyomi Toon is free; Pro is not required for this profile."
+  },
+  "facial": {
+    "revision": "2026-10-17-facial-v1",
+    "guide": "VRCHAT_PC_FACIAL_SETUP.md",
+    "status": "Required destination-authoring policy; implement and verify per character. This profile is not an executed Unity importer.",
+    "menuLanguage": {
+      "default": "en",
+      "scope": "All avatar expression controls, submenus and puppet-axis display labels; independent of FITA UI and conversation language.",
+      "resolutionOrder": [
+        "explicit current user request",
+        "recorded explicit character preference",
+        "ask once before menu authoring",
+        "English if unspecified"
+      ],
+      "askWhenUnspecified": true,
+      "question": "Which language would you like for the avatar's expression buttons? English is the default.",
+      "suggestedChoices": [
+        "English",
+        "Spanish",
+        "Custom language"
+      ],
+      "persistIn": "Character-owned Unity configuration record, also cited in facial-bindings evidence",
+      "recordFields": [
+        "menuLanguage",
+        "languageSource",
+        "displayLabels",
+        "facialWorkflowRevision"
+      ],
+      "translateDisplayLabelsOnly": true,
+      "labels": {
+        "en": {
+          "cameraBlink": "Camera Blink",
+          "mood": "Mood",
+          "mouth": "Mouth",
+          "brows": "Brows",
+          "smile": "Smile",
+          "frown": "Frown",
+          "angry": "Angry",
+          "sad": "Sad",
+          "raisedBrows": "Raised Brows",
+          "gaze": "Gaze",
+          "blink": "Blink",
+          "reset": "Reset",
+          "left": "Left",
+          "right": "Right",
+          "up": "Up",
+          "down": "Down",
+          "skinBrightness": "Skin Brightness",
+          "skinSpecular": "Skin Reflection"
+        },
+        "es": {
+          "cameraBlink": "Parpadeo cámara",
+          "mood": "Ánimo",
+          "mouth": "Boca",
+          "brows": "Cejas",
+          "smile": "Sonrisa",
+          "frown": "Boca triste",
+          "angry": "Enfado",
+          "sad": "Tristeza",
+          "raisedBrows": "Cejas elevadas",
+          "gaze": "Mirada",
+          "blink": "Parpadeo",
+          "reset": "Restaurar",
+          "left": "Izquierda",
+          "right": "Derecha",
+          "up": "Arriba",
+          "down": "Abajo",
+          "skinBrightness": "Brillo de piel",
+          "skinSpecular": "Reflejo de piel"
+        }
+      }
+    },
+    "gaze": {
+      "nativeEyeLookRequired": true,
+      "pilotTrackingRoute": "VRChat native Selfie Expression webcam",
+      "initialTravelRadiusMetres": 0.0065,
+      "travelPolicy": "Fit world-space travel to the actual eyelid aperture and inherited scale; 6.5 mm is a starting radius, not a universal guarantee.",
+      "planarEyeAdapter": "Bounded lever with head-relative X/Y translation carrier, local Z disabled; iris, pupil and glints move rigidly together with corrected bindposes.",
+      "rotationPolicy": "Read back valid neutral/directional quaternions via supported API or verified serialized properties. Never leave zero quaternions.",
+      "competingFxGazeWriters": false,
+      "blinkMayShrinkIrisAssembly": false
+    },
+    "blink": {
+      "parameter": "FITA_BlinkCamera",
+      "parameterType": "Bool",
+      "defaultEnabled": true,
+      "animatorDefault": true,
+      "expressionDefault": 1,
+      "saved": false,
+      "networkSynced": true,
+      "menuControl": "Toggle",
+      "menuOnValue": 1,
+      "labelKey": "cameraBlink",
+      "defaultState": "Camera",
+      "onMode": "Native linear camera blink",
+      "offMode": "Stable timed automatic blink; native gaze stays active",
+      "initialRendererEnabled": {
+        "camera": true,
+        "stable": false
+      },
+      "modeIsolation": "Mutually exclusive enabled flags on coordinated derived face renderers. Descriptor targets camera renderer; stable renderer native blink has zero deltas and a separate full automatic blink target.",
+      "mirrorAllFacialCurves": true,
+      "preservePositionAndNormalDeltas": true,
+      "fullBlinkInLookUpDownSlots": false,
+      "cameraResponse": "original-linear",
+      "rejectedFilter": "0-35% blink deadzone worsened false closures; do not ship as a correction",
+      "automatic": {
+        "cycleSeconds": 4.2,
+        "keysSecondsAndWeight": [
+          [
+            0,
+            0
+          ],
+          [
+            3.75,
+            0
+          ],
+          [
+            3.84,
+            100
+          ],
+          [
+            3.89,
+            100
+          ],
+          [
+            4.02,
+            0
+          ],
+          [
+            4.2,
+            0
+          ]
+        ]
+      },
+      "knownLimitation": "Native Selfie input can falsely close eyes on downward gaze. The fallback isolates the visible face; it does not repair webcam detection. Real blink tracking must be tested in Camera mode."
+    },
+    "speech": {
+      "multiRendererRoute": "Viseme Parameter Only with coordinated FX clips",
+      "visemes": [
+        "sil",
+        "pp",
+        "ff",
+        "th",
+        "dd",
+        "kk",
+        "ch",
+        "ss",
+        "nn",
+        "rr",
+        "aa",
+        "e",
+        "i",
+        "o",
+        "u"
+      ],
+      "singleRendererRoute": "Native viseme mapping only when all required parts demonstrably follow",
+      "preserveApprovedAnimeJaw": true
+    },
+    "expressions": {
+      "preserveApprovedBindings": true,
+      "manualMoodControlsRequired": true,
+      "optionalMoodParameters": [
+        "VRCFaceBlendH",
+        "VRCFaceBlendV"
+      ],
+      "manualMoodIsCameraEmotionTracking": false,
+      "cameraEmotionPolicy": "Verify actual capabilities of the installed tracker/SDK; do not promise smile/sadness detection from menu aliases."
+    },
+    "validation": {
+      "evidenceGate": "facial-bindings",
+      "evidenceDirectory": "output/review",
+      "requiredChecks": [
+        "language-and-complete-label-map",
+        "fresh-load-camera-on",
+        "toggle-off-on-and-reload",
+        "native-blink-linear",
+        "stable-mode-ignores-native-closure",
+        "automatic-blink-reopens",
+        "gaze-both-modes-and-diagonal-limits",
+        "rigid-iris-pupil-glints",
+        "visemes-and-expressions-both-modes",
+        "preserved-neutral-and-morph-normals",
+        "restored-body-test-state",
+        "sdk-renderer-performance"
+      ],
+      "clientChecks": [
+        "downward-gaze-eyes-open",
+        "deliberate-blink",
+        "held-closure-and-reopen",
+        "diagonal-gaze",
+        "menu-language-and-mode-toggle"
+      ],
+      "restoreTestStateInFinally": true,
+      "clientGateSeparateFromAuthoring": true
+    }
+  },
+  "physics": {
+    "integration": "Simplified",
+    "physBoneVersion": "1.1",
+    "pilotInventory": {
+      "hairChains": 4,
+      "clothingChains": 9,
+      "tissueAnchors": 4,
+      "totalPhysBones": 17,
+      "colliders": 7
+    },
+    "units": "Collider radii and endpoint lengths are measured in world metres, then transformed into the actual owner's local units. The pilot bone scale was about 158 despite a 1.58m avatar.",
+    "curveMeaning": "Curves multiply their scalar. x is the SDK's actual chain ratio; use CalcBoneRatio/CalcPull/CalcSpring/CalcMaxAngle or equivalent verified APIs, not index assumptions.",
+    "curveInterpolation": "new Keyframe points used zero tangents unless explicitly marked linear; preserve or report interpolation when adapting.",
+    "ponytails": {
+      "pull": 0.55,
+      "pullCurve": [
+        [
+          0,
+          1
+        ],
+        [
+          0.35,
+          0.9
+        ],
+        [
+          1,
+          0.6
+        ]
+      ],
+      "tipPull": 0.33,
+      "spring": 0.38,
+      "springCurve": [
+        [
+          0,
+          0.15
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "springInterpolation": "linear",
+      "gravity": 0,
+      "immobile": 0.12,
+      "maxAngleDegrees": 28,
+      "angleCurve": [
+        [
+          0,
+          0.17857143
+        ],
+        [
+          0.3333333,
+          0.65
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "rootAngleDegrees": 5,
+      "attachmentPosition": "fixed",
+      "particleRadiusMetres": 0.006,
+      "colliders": [
+        "head",
+        "torso",
+        "neck",
+        "shoulders"
+      ],
+      "note": "Spring increased from .30 to .38 at user request; final return and bounce must still be assessed on each avatar. A fixed attachment does not mean several upper segments must be immobile."
+    },
+    "frontLocks": {
+      "pull": 0.72,
+      "pullCurve": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0.625
+        ]
+      ],
+      "pullInterpolation": "linear",
+      "tipPull": 0.45,
+      "spring": 0.3,
+      "springCurve": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "springInterpolation": "linear",
+      "gravity": 0,
+      "immobile": 0.12,
+      "maxAngleDegrees": 16,
+      "angleCurve": [
+        [
+          0,
+          0
+        ],
+        [
+          0.08,
+          0
+        ],
+        [
+          0.35,
+          0.5
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "rootAngleDegrees": 0,
+      "attachmentPosition": "fixed",
+      "particleRadiusMetres": 0.006,
+      "colliders": [
+        "head",
+        "torso",
+        "neck",
+        "shoulders"
+      ],
+      "note": "Front locks have a milder profile and tighter facial clearance than ponytails."
+    },
+    "skirtPanels": {
+      "pull": 0.75,
+      "pullCurve": [
+        [
+          0,
+          1
+        ],
+        [
+          0.35,
+          1
+        ],
+        [
+          1,
+          0.72
+        ]
+      ],
+      "spring": 0.06,
+      "springCurve": [
+        [
+          0,
+          0.25
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "gravity": 0.08,
+      "immobile": 0.35,
+      "maxAngleDegrees": 42,
+      "angleCurve": [
+        [
+          0,
+          0.15
+        ],
+        [
+          0.25,
+          0.35
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "rootAngleDegrees": 6.3,
+      "particleRadiusMetres": 0.01,
+      "colliders": [
+        "leftThigh",
+        "rightThigh",
+        "pelvis"
+      ],
+      "kinematicAdapter": "Eight unweighted parent controls partially follow fitted thigh swing; child chains keep PhysBones. Front/rear following was fitted separately, not a universal fraction.",
+      "limitation": "Stationary crouch still penetrated thighs; movement improved. Collision components and following pivots do not prove vertex-surface clearance."
+    },
+    "frontStrap": {
+      "pull": 0.75,
+      "pullCurve": [
+        [
+          0,
+          1
+        ],
+        [
+          0.35,
+          1
+        ],
+        [
+          1,
+          0.72
+        ]
+      ],
+      "spring": 0.06,
+      "springCurve": [
+        [
+          0,
+          0.25
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "gravity": 0.08,
+      "immobile": 0.35,
+      "maxAngleDegrees": 24,
+      "angleCurve": [
+        [
+          0,
+          0
+        ],
+        [
+          0.15,
+          0
+        ],
+        [
+          0.55,
+          0.6
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "particleRadiusMetres": 0.006,
+      "colliders": [
+        "leftThigh",
+        "rightThigh",
+        "pelvis",
+        "torso"
+      ]
+    },
+    "breastAndGluteAnchors": {
+      "pull": 0.55,
+      "spring": 0.24,
+      "gravity": 0,
+      "maxAngleDegrees": 16,
+      "responseGoal": "medium, user-requested; inspect actual connected surface weights before increasing forces",
+      "endpointExampleMetres": 0.035,
+      "staticWeightEvidence": "After the local smooth shared-centre repair, a controlled 16-degree pose displaced breast surfaces about 6.3mm and glutes about 4.0mm. These are static deformation measurements, not verified dynamic jiggle amplitude."
+    },
+    "fittedColliderExamplesMetres": {
+      "headRadius": 0.07,
+      "headHeight": 0.18,
+      "torsoRadius": 0.065,
+      "thighRadius": 0.052,
+      "neckRadius": 0.033,
+      "shoulderRadius": 0.035,
+      "pelvisRadius": 0.065
+    },
+    "collisionRules": [
+      "Fit capsule ends to the actual joints and preserve rest clearance; do not copy pilot positions.",
+      "Assign collider lists explicitly and verify effective world dimensions after inherited scale.",
+      "Keep grabbing, posing, stretch and squish disabled unless requested; cross-avatar interaction is separate from explicit local colliders.",
+      "A virtual endpoint is not an extra real bone. Single-bone anchors need an endpoint; nonuniform inherited scale needs a measured adapter.",
+      "Never let a constraint and a PhysBone write the same Transform; use a kinematic parent and simulated child."
+    ]
+  },
+  "materials": {
+    "baselineStatus": "Review11 built successfully and user reported a visible useful improvement. Further mask authoring and anisotropic hair recommendations are pending, not completed features.",
+    "shader": ".poiyomi/Poiyomi Toon",
+    "lighting": {
+      "_LightingMode": 1,
+      "_LightingMinLightBrightness": 0.38,
+      "_LightingCapEnabled": 1,
+      "_LightingCap": 1.05,
+      "_LightingMonochromatic": 0.82,
+      "_LightingAdditiveMonochromatic": 0.82,
+      "_LightingAdditiveLimit": 1.05,
+      "_LightingCastedShadows": 0.35,
+      "_ShadowBorder": 0.45
+    },
+    "skin": {
+      "_ShadowStrength": 0.55,
+      "_ShadowBlur": 0.32,
+      "_ShadowColor": [
+        0.92,
+        0.83,
+        0.85,
+        1
+      ],
+      "_MochieMetallicMultiplier": 0,
+      "_MochieSpecularTint": [
+        0.22,
+        0.22,
+        0.22,
+        1
+      ],
+      "_SubsurfaceScattering": 1,
+      "_SSSColor": [
+        1,
+        0.27,
+        0.22,
+        1
+      ],
+      "_SSSStrength": 0.14,
+      "_SSSSpread": 3,
+      "_SSSDistortion": 0.45,
+      "_SSSThicknessMod": 0,
+      "_SSSBaseColorMix": 0.45,
+      "_SSSShadowStrength": 0.35
+    },
+    "hair": {
+      "_MochieMetallicMultiplier": 0,
+      "_MochieSpecularTint": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "packedSmoothnessBase": 0.32,
+      "_EnableAniso": 0,
+      "_SubsurfaceScattering": 0,
+      "note": "Hair is dielectric. Stylized anisotropy is a future fitted comparison, not enabled in the validated baseline."
+    },
+    "outfit": {
+      "_ShadowStrength": 0.78,
+      "_ShadowBlur": 0.16,
+      "_ShadowColor": [
+        0.78,
+        0.75,
+        0.82,
+        1
+      ],
+      "clothSmoothnessBase": 0.26,
+      "bootsSmoothnessBase": 0.53,
+      "hardwareSmoothnessTarget": 0.76,
+      "_MochieMetallicMultiplier": 0.7,
+      "note": "Metallic multiplier is applied through a semantic metal mask, not to all fabric or boots."
+    },
+    "reflections": {
+      "_MochieBRDF": 1,
+      "_MochieRoughnessMultiplier": 1,
+      "_MochieReflectionTint": [
+        0.22,
+        0.22,
+        0.22,
+        1
+      ],
+      "nonSkinSpecularTint": [
+        0.4,
+        0.4,
+        0.4,
+        1
+      ]
+    },
+    "outline": {
+      "_EnableOutlines": 1,
+      "_OutlineSpace": 1,
+      "_OutlineFixedSize": 0,
+      "_LineColor": [
+        0.055,
+        0.045,
+        0.065,
+        1
+      ],
+      "_OutlineLit": 0,
+      "_OutlineUseVertexColorNormals": 0,
+      "_OutlineVertexColorMask": 0,
+      "_LineWidthByRegion": {
+        "face": 0.045,
+        "skin": 0.06,
+        "hair": 0.08,
+        "clothAndBoots": 0.09,
+        "lipRegistrationLayer": 0
+      },
+      "unitExplanation": "Poiyomi divides _LineWidth by 100; world mode gives 0.45/0.6/0.8/0.9mm in this pilot. Do not multiply again by the FBX bone scale.",
+      "note": "Keep the dark outer silhouette; eye/glint layers do not need additional hull outlines. Vertex-color outline baking was not performed; preserve custom shading normals and existing attributes."
+    },
+    "emission": {
+      "_EnableEmission": 0,
+      "note": "No extra glow requested in Review11. Emission is separate from bloom; a visible halo depends on world/camera post-processing."
+    },
+    "masks": {
+      "authoring": "Paint on the 3D model while storing separate mask images on the approved existing UVs; inspect the 2D atlas, seams, padding and mip levels. Preserve base albedo pixels and connected geometry.",
+      "packedPBR": "R metal, G smoothness, B reflection mask, A specular mask in _MochieMetallicMaps; data textures use sRGB off. Smoothness white means smoother/glossier; roughness has the opposite direction.",
+      "SSS": "_SSSThicknessMap RGB tints transmission, A stores thickness; the shader inverts A. The pilot used A=1-0.6*estimatedSkinCoverage and _SSSThicknessMod=0, an approximation rather than measured thickness. Author anatomical masks for production and inspect thin areas/backlighting.",
+      "outline": "Separate grayscale size mask, evaluated per vertex, preserves outer lines while reducing unwanted internal marks.",
+      "pilotLimitation": "The first masks were estimated from atlas colors. That incorrectly classified pale hair as metal; it was corrected by excluding hair from metal. Semantic masks per region are required before claiming production-quality separation."
+    },
+    "buildDialogs": [
+      "Thry: Automatic Lighting Fix can assign a common fitted probe anchor to renderers without one; inspect intentional existing anchors before enabling.",
+      "Locking Materials: normal shader optimization notice, not a paid trial or subscription. User presses OK; first compilation can take minutes.",
+      "Do not buy Pro or replace a shader just because an unused optional package preset mentions Pro; check the materials actually assigned to the avatar."
+    ],
+    "checks": [
+      "Neutral, dark, saturated yellow and back lighting with fixed cameras",
+      "Face and body remain balanced",
+      "Hair keeps custom normals and dielectric response",
+      "Outlines at front, profile, three-quarter, close and distant views",
+      "Base textures and approved rig unchanged",
+      "Local SDK build succeeds; user compares the actual VRChat result"
+    ],
+    "skinAppearance": {
+      "revision": "2026-10-20-skin-v1",
+      "guide": "VRCHAT_PC_SKIN_SETUP.md",
+      "requiredForEveryFitaPcAvatar": true,
+      "preserveApprovedAlbedo": true,
+      "preserveCharacterSkinTone": true,
+      "adaptiveLighting": true,
+      "forceUniversalPalePalette": false,
+      "coverage": [
+        "complete face including chin and ears",
+        "neck",
+        "both hands",
+        "all alternative blink renderers"
+      ],
+      "isolation": "Semantic skin-only materials; split shared cloth/skin slots without changing UVs, source geometry or weights. Never animate non-skin slots through a shared material property.",
+      "referenceOnly": {
+        "character": "ReferenceAvatar",
+        "notUniversal": true,
+        "lighting": {
+          "_LightingMinLightBrightness": 0.81,
+          "_LightingCap": 0.9,
+          "_LightingCapEnabled": 1,
+          "_LightingAdditiveLimit": 0.09,
+          "_LightingMonochromatic": 1,
+          "_LightingAdditiveMonochromatic": 1,
+          "_LightingAdditivePassthrough": 0
+        }
+      },
+      "controls": [
+        {
+          "parameter": "FITA_SkinBrightness",
+          "labelKey": "skinBrightness",
+          "properties": [
+            "_LightingMinLightBrightness",
+            "_LightingCap"
+          ],
+          "parameterType": "Float",
+          "menuControl": "RadialPuppet",
+          "defaultValue": 0.5,
+          "saved": true,
+          "networkSynced": true,
+          "sampleValues": [
+            0,
+            0.5,
+            1
+          ],
+          "required": true,
+          "animatorDefault": 0.5,
+          "onlySkin": true,
+          "centre": "approved appearance",
+          "endpoints": "fit and verify per character, never blindly copy pilot values",
+          "animatedPropertyMode": "Poiyomi RA with a verified character-scoped skin suffix, retained after shader locking"
+        },
+        {
+          "parameter": "FITA_SkinSpecular",
+          "labelKey": "skinSpecular",
+          "properties": [
+            "_MochieSpecularStrength"
+          ],
+          "parameterType": "Float",
+          "menuControl": "RadialPuppet",
+          "defaultValue": 0.5,
+          "saved": true,
+          "networkSynced": true,
+          "sampleValues": [
+            0,
+            0.5,
+            1
+          ],
+          "required": true,
+          "animatorDefault": 0.5,
+          "onlySkin": true,
+          "centre": "approved appearance",
+          "endpoints": "fit and verify per character, never blindly copy pilot values",
+          "animatedPropertyMode": "Poiyomi RA with a verified character-scoped skin suffix, retained after shader locking"
+        }
+      ],
+      "menu": {
+        "preserveExistingControls": true,
+        "maxControlsPerMenu": 8,
+        "overflowSubmenu": {
+          "en": "Skin",
+          "es": "Piel"
+        },
+        "reservedExpressionBits": 16,
+        "translateLabelsOnly": true
+      },
+      "validation": [
+        "0 / 0.5 / 1 for each radial and combinations",
+        "locked shader property and runtime binding checks",
+        "face, chin, neck and hands stay coherent",
+        "both blink modes covered",
+        "clothing, hair, lashes, iris and Eye Shadow unaffected",
+        "neutral, dim, saturated and backlit environments",
+        "restore defaults before save and build"
+      ],
+      "report": {
+        "schema": "fita-vrchat-skin-controls/v1",
+        "field": "skinControls",
+        "materialsPassedRequiresBothControls": true,
+        "clientAcceptanceSeparate": true
+      }
+    }
+  },
+  "pilotResult": {
+    "build": "LastUpdates_Review11_Poiyomi",
+    "bundleBytes": 96018792,
+    "bundleSHA256": "FEAE9E805C9817BDB7D32546DAD740FED3C8E9BB5A43A062E58DD090008E5522",
+    "SDKValidationErrors": [],
+    "preservedOriginalFiles": 223,
+    "userFeedback": "Material change works and improves appearance; further refinement requested.",
+    "unresolved": [
+      "Skirt/thigh contact in stationary crouch",
+      "Residual right anatomical shoulder-strap clipping",
+      "Small central-hair region influenced by left ponytail weights",
+      "Full auxiliary/corrective and other-animation coverage is not universally proven",
+      "Detailed semantic masks and anisotropic hair still proposed",
+      "Dynamic tissue bounce, facial/viseme delivery and tracker performance need their own evidence; a materials approval does not certify these"
+    ]
+  },
+  "officialSources": [
+    "https://creators.vrchat.com/sdk/upgrade/current-unity-version/",
+    "https://creators.vrchat.com/common-components/physbones/",
+    "https://www.poiyomi.com/download",
+    "https://github.com/poiyomi/PoiyomiToonShader/releases/tag/v10.0.25",
+    "https://www.poiyomi.com/shading/subsurface-scattering",
+    "https://www.poiyomi.com/shading/reflections-and-specular",
+    "https://www.poiyomi.com/10.0/outlines"
+  ]
+}

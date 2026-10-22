@@ -1,0 +1,28 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {Store,emptyProject} from '../server/storage.js';
+import {snapshot} from '../server/lineage.js';
+import {importSegmentationBaseline} from '../server/segmentation-baseline.js';
+import {segmentationSourceIdentity,segmentationSource,segmentIdentity,currentSegmentationBaseline} from '../server/segmentation-identity.js';
+test('pretexture baseline versions sources, invalidates old segments, and rolls back failed persistence',async t=>{
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'baseline-test-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const store=new Store(root);await store.init();const p=emptyProject('Baseline fixture'),glb=await fs.readFile('fixtures/mannequin.glb');
+ p.reference={id:'concept.png'};p.referenceState={status:'ready',referenceId:p.reference.id};
+ for(const part of ['head','body']){const m={...await store.asset(p,glb,'glb','importado'),group:part,lineage:snapshot(p)};p.models.push(m);p.groups[part].selectedModelId=m.id;}await store.save(p);
+ const sourceIdentity=segmentationSourceIdentity(p),originalId=p.groups.head.selectedModelId;
+ const input={sourceIdentity,confirm:true,review:{views:['front','left','right'],referenceFront:'front.png',referenceLeft:'left.png',referenceRight:'right.png',findings:'Synthetic contract fixture'}};
+ let validations=0;const runner=async(mode,file)=>{assert.equal(mode,'baseline');validations++;const job=JSON.parse(await fs.readFile(file));for(const part of ['head','body'])await fs.writeFile(path.join(job.directory,part+'-baseline.glb'),glb);await fs.writeFile(path.join(job.directory,'baseline-validation.json'),JSON.stringify({topologyPreserved:true,outsideNeckPreserved:true,headLocalShapePreserved:true,independentParts:true}));};
+ const call=(buffer=Buffer.from('BLENDERfixture'))=>importSegmentationBaseline({p,store,runner,buffer,input,check:()=>{}});
+ const approvedReview=structuredClone(input.review);input.review.views=['front','right'];
+ await assert.rejects(()=>call(),/SEG_BASELINE_REVIEW_REQUIRED/);assert.equal(validations,0);assert.equal(p.segmentationBaseline,undefined);
+ input.review=structuredClone(approvedReview);delete input.review.referenceLeft;await assert.rejects(()=>call(),/SEG_BASELINE_REVIEW_REQUIRED/);
+ input.review=approvedReview;
+ const baseline=await call();assert.notEqual(segmentIdentity(p),sourceIdentity);assert.notEqual(segmentationSource(p,'head').id,originalId);assert.equal(p.groups.head.selectedModelId,originalId);
+ assert.equal((await call()).id,baseline.id);assert.equal(validations,1);
+ const save=store.save.bind(store);store.save=async()=>{throw Error('disk failed');};await assert.rejects(()=>call(Buffer.from('BLENDERother')),/disk failed/);assert.equal(p.segmentationBaseline.id,baseline.id);store.save=save;
+ p.notesRevision++;assert.equal(currentSegmentationBaseline(p),null);assert.equal(segmentationSource(p,'head'),undefined);
+ await assert.rejects(()=>call(),/SEG_INPUTS_CHANGED/);
+});

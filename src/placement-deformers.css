@@ -1,0 +1,14 @@
+.mesh-editor{position:absolute;right:14px;top:62px;z-index:7;width:250px;max-width:calc(100% - 28px);color:#ffffff;font-size:12px;pointer-events:auto}
+.mesh-editor-toggle{background:#27292e;border:1px solid #61758e;color:inherit;border-radius:7px;padding:9px 12px;float:right;cursor:pointer}
+.mesh-editor.is-open .mesh-editor-toggle{float:none;width:100%;border-radius:7px 7px 0 0}
+.mesh-editor-panel{background:rgba(27,27,31,.96);border:1px solid #475265;border-top:0;border-radius:0 0 8px 8px;padding:12px;max-height:calc(100vh - 245px);overflow:auto;box-shadow:0 8px 22px #0005}
+.mesh-editor-panel p{margin:10px 0;font-size:11px;line-height:1.45}.mesh-editor-panel small{display:block;color:#afb2b7;font-size:10px;line-height:1.4}
+.mesh-editor-panel .button{width:100%;white-space:normal;padding:8px;font-size:12px}
+.mesh-point-list{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}.mesh-point-list button,.mesh-editor-history button{border:1px solid #475265;border-radius:5px;background:#2e2f33;color:inherit;padding:6px;cursor:pointer}
+.mesh-point-list button[aria-pressed=true],.mesh-editor-panel button[aria-pressed=true]{background:#3b526a;border-color:#acc7e0}
+.mesh-editor-panel label{display:block;margin:8px 0;font-size:11px}.mesh-editor-panel input[type=range]{display:block;width:100%;accent-color:#61aeed}
+.mesh-editor-panel .mesh-editor-check{display:flex;align-items:center;gap:7px}.mesh-editor-panel input[type=checkbox]{width:auto;margin:0;accent-color:#61aeed}
+.mesh-editor-panel fieldset{padding:8px;border:1px solid #434957;border-radius:5px;margin:12px 0}.mesh-editor-vector{display:flex;gap:6px}.mesh-editor-vector label{min-width:0;flex:1;margin:0}.mesh-editor-vector input{width:100%;min-width:0;padding:5px;background:#1d1e21;border:1px solid #505767;border-radius:4px;color:inherit}
+.mesh-editor-history{display:flex;gap:8px;margin-top:10px}.mesh-editor-history button{flex:1}.mesh-editor button:disabled{opacity:.4;cursor:default}
+.canvas-host canvas:focus-visible{outline:1px solid #d0d0d0;outline-offset:-2px}
+@media(max-width:650px){.mesh-editor{width:210px;right:8px;top:94px}.mesh-editor-panel{max-height:280px}}

@@ -1,0 +1,269 @@
+/* ==========================================================================
+   DIS-002 · Lobby (project library). Loaded last.
+   Night-sky base (LobbySky.jsx) with a celeste accent; lobby-only rules are scoped to html.in-lobby,
+   set by main.jsx while no project is open, so portaled help and modals follow it too.
+   Projects are collectible cards (ProjectCard.jsx). Card rarity = project progress.
+   ========================================================================== */
+html.in-lobby{
+  --lb-bg:#05080d;--lb-panel:#0d131b;--lb-line:#1a2430;--lb-line-2:#2a3746;
+  --lb-text:#eef6fb;--lb-muted:#98a9b8;--lb-dim:#687a8b;
+  --lb-accent:#5cc8ff;--lb-accent-2:#2fa8ec;--lb-accent-soft:#b8e6ff;
+  /* Re-point the shared DIS-001 tokens so motion.css follows the lobby palette. */
+  --wb-red:#5cc8ff;--wb-red-fill:#2fa8ec;--wb-raspberry:#2490d6;--wb-magenta:#9be0ff;--wb-violet:#8fa8ff;--wb-ember:#5cc8ff;
+  --wb-ring:conic-gradient(from var(--glow-angle),#5cc8ff,#e8f8ff,#2fa8ec,#9be0ff,#8fa8ff,#5cc8ff);
+  background:var(--lb-bg)}
+
+/* ---------- Base: deep space with faint stars (static). Global since DIS-003 (whole app is celeste). ---------- */
+html{background:#04070d}
+.app-shell::before{background:
+  radial-gradient(1px 1px at 12% 22%,#e6f2ff 50%,transparent 51%),radial-gradient(1px 1px at 37% 71%,#ffffffa0 50%,transparent 51%),
+  radial-gradient(1.5px 1.5px at 58% 36%,#dcecff 50%,transparent 51%),radial-gradient(1px 1px at 81% 58%,#ffffff90 50%,transparent 51%),
+  radial-gradient(1px 1px at 69% 87%,#e6f2ff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 24% 52%,#ffffff80 50%,transparent 51%),
+  radial-gradient(1px 1px at 91% 12%,#ffffffa0 50%,transparent 51%),radial-gradient(1px 1px at 46% 9%,#dcecff 50%,transparent 51%),
+  radial-gradient(1px 1px at 6% 64%,#ffffff70 50%,transparent 51%),radial-gradient(1px 1px at 76% 30%,#ffffff80 50%,transparent 51%),
+  linear-gradient(118deg,transparent 32%,rgb(120 150 220 / .025) 45%,rgb(170 190 255 / .04) 50%,rgb(120 150 220 / .025) 55%,transparent 68%),
+  radial-gradient(ellipse 120% 70% at 50% -15%,rgb(40 70 130 / .16),transparent 70%),
+  radial-gradient(ellipse 70% 50% at 100% 100%,rgb(70 60 140 / .08),transparent 70%),
+  linear-gradient(180deg,#070d19 0%,#050a14 45%,#04070d 100%)}
+.in-lobby .home .topbar{background:rgb(7 9 12 / .72);border-bottom-color:var(--lb-line)}
+.in-lobby .breadcrumb,.in-lobby .breadcrumb-home{color:var(--lb-dim)}
+.in-lobby .breadcrumb-home:hover{color:var(--lb-text)}
+.in-lobby .breadcrumb strong{color:#ffffff}
+.in-lobby .language-select{background:#111418;border-color:var(--lb-line-2);color:#ffffff}
+:where(button,a,input,select,textarea,summary,label):focus-visible{outline-color:#89b9d2}
+
+/* FITA wordmark: sky-blue neon. CSS overrides the SVG stop attributes. */
+
+/* ---------- Primary button: light celeste with dark text (global since DIS-003) ---------- */
+.button.primary{background:linear-gradient(135deg,#8ad9ff,#3cb0f0);color:#04182a;font-weight:650}
+.button.primary:hover:not(:disabled):not(.disabled){background:linear-gradient(135deg,#a2e2ff,#4dbaf5);box-shadow:0 8px 26px rgb(60 170 240 / .25)}
+.button.primary.is-pressed{background-image:radial-gradient(circle at var(--press-x) var(--press-y),rgb(255 255 255 / var(--press-a)) 0 var(--press-r),transparent calc(var(--press-r) + 1px)),linear-gradient(135deg,#a2e2ff,#4dbaf5)!important}
+.rgb-accent::before{opacity:.7}
+.rgb-accent::after{background:linear-gradient(110deg,rgb(92 200 255 / .22),rgb(143 168 255 / .14));opacity:.55}
+.in-lobby .button.secondary{background:#111418;border-color:var(--lb-line-2);color:#ffffff}
+.in-lobby .button.secondary:hover:not(:disabled):not(.disabled){border-color:#99b2c2;color:#fff;box-shadow:0 0 0 3px rgb(92 200 255 / .08)}
+.in-lobby .button.subtle{color:var(--lb-muted)}
+.in-lobby .button.subtle:hover:not(:disabled):not(.disabled){color:var(--lb-text)}
+
+/* ---------- Header + toolbar ---------- */
+.in-lobby .eyebrow{color:var(--lb-dim)}
+.in-lobby .library-header h1{color:var(--lb-text)}
+.in-lobby .library-header h1 span{color:var(--lb-muted)}
+.in-lobby .library-header p{color:var(--lb-dim)}
+.in-lobby .library-toolbar{border-color:var(--lb-line)}
+.in-lobby .library-toolbar h2{color:var(--lb-text)}
+.in-lobby .library-toolbar h2 span{display:inline-block;padding:2px 8px;border-radius:99px;color:var(--lb-accent);background:rgb(92 200 255 / .1);font-variant-numeric:tabular-nums}
+.in-lobby .library-toolbar>span{color:var(--lb-dim)}
+.in-lobby .demo-entry{background:rgb(13 16 20 / .86);border-color:var(--lb-line);backdrop-filter:blur(6px)}
+.in-lobby .demo-entry svg{color:var(--lb-accent)}
+.in-lobby .demo-entry small{color:var(--lb-dim)}
+.in-lobby .toast{background:#13171c;border-color:#2a3a4a;color:#ffffff}
+
+/* ---------- Modals opened from the lobby ---------- */
+.in-lobby .modal{background:#0f151d;border-color:#2b3846}
+.in-lobby .modal p{color:var(--lb-muted)}
+.in-lobby .modal input,.in-lobby .modal select{background:#0c0e11;border-color:#33414f;color:var(--lb-text)}
+.in-lobby .trash-project{border-color:var(--lb-line)}
+
+/* ---------- Night sky (LobbySky.jsx): tiny twinkling stars and a rare comet, kept faint ---------- */
+.lobby-sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sky-star{position:absolute;left:var(--x);top:var(--y);width:var(--z);height:var(--z);border-radius:50%;background:#fff;box-shadow:0 0 calc(var(--z) * 2) rgb(205 225 255 / .55);opacity:0;animation:star-twinkle var(--t) ease-in-out var(--w) infinite}
+.sky-star.spark::before,.sky-star.spark::after{content:'';position:absolute;left:50%;top:50%;width:calc(var(--z) * 5);height:1px;translate:-50% -50%;background:linear-gradient(90deg,transparent,rgb(255 255 255 / .7),transparent)}
+.sky-star.spark::after{rotate:90deg}
+@keyframes star-twinkle{0%,100%{opacity:0;transform:scale(.4)}45%,55%{opacity:var(--o);transform:scale(1)}}
+.sky-comet{position:absolute;left:var(--x);top:var(--y);width:150px;height:1.5px;border-radius:1px;opacity:0;transform-origin:100% 50%;
+  background:linear-gradient(90deg,transparent,rgb(190 215 255 / .35) 55%,#fff);animation:sky-comet var(--t) linear var(--w) infinite}
+.sky-comet::after{content:'';position:absolute;right:-1.5px;top:50%;width:3px;height:3px;margin-top:-1.5px;border-radius:50%;background:#fff;box-shadow:0 0 6px 2px rgb(220 235 255 / .75)}
+@keyframes sky-comet{0%{opacity:0;transform:rotate(var(--a)) translateX(0)}.6%{opacity:.95}3.2%{opacity:.8}4.5%{opacity:0;transform:rotate(var(--a)) translateX(var(--len))}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--len))}}
+.in-lobby .home .main-shell{position:relative;z-index:1}
+
+/* Entering a project: a short light ring from the click point (effects.js warpFrom). Not scoped: it outlives the lobby. */
+.portal-warp{position:fixed;inset:0;z-index:300;pointer-events:none;
+  background:radial-gradient(circle at var(--x) var(--y),rgb(240 251 255 / .95) 0,rgb(155 224 255 / .6) 6%,rgb(92 200 255 / .25) 14%,transparent 30%);
+  animation:portal-warp .8s cubic-bezier(.2,.75,.2,1) forwards}
+@keyframes portal-warp{0%{opacity:0;clip-path:circle(0 at var(--x) var(--y))}25%{opacity:1}100%{opacity:0;clip-path:circle(150vmax at var(--x) var(--y))}}
+
+/* ---------- Collectible cards ---------- */
+.in-lobby .project-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:28px 22px}
+.tcg-card{--tier:#3a4350;--tier-glow:transparent;position:relative;min-width:0;container-type:inline-size;animation:tcg-deal .55s var(--wb-ease) both;animation-delay:calc(var(--i,0)*55ms)}
+.in-lobby .project-gallery>.tcg-card{animation:tcg-deal .55s var(--wb-ease) both;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes tcg-deal{from{opacity:0;transform:translateY(28px) rotate(-3deg) scale(.96)}to{opacity:1;transform:none}}
+
+/* Frame: dark steel card stock; the tier shows in the rim, pips and finish. */
+.tcg-face{position:relative;display:flex;width:100%;aspect-ratio:63/88;padding:3.8cqw;border:0;border-radius:5.5cqw;cursor:pointer;color:var(--lb-text,#eef6fb);font:inherit;text-align:left;overflow:hidden;isolation:isolate;
+  background:linear-gradient(160deg,rgb(255 255 255 / .09),transparent 40%,rgb(0 0 0 / .3)),linear-gradient(145deg,#28303a,#12171d 48%,#212831 72%,#0f1318);
+  box-shadow:inset 0 0 0 1.5px var(--tier),inset 0 1px 0 1.5px rgb(255 255 255 / .1),0 0 0 1px #000,0 16px 30px rgb(0 0 0 / .5);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .4s var(--wb-ease),box-shadow .3s}
+.tcg-face:hover:not(:disabled){transform:perspective(900px) translateY(-6px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .12s linear,box-shadow .3s;
+  box-shadow:inset 0 0 0 1.5px var(--tier),inset 0 1px 0 1.5px rgb(255 255 255 / .14),0 0 0 1px #000,0 24px 40px rgb(0 0 0 / .55),0 0 28px var(--tier-glow)}
+.tcg-face:active:not(:disabled){transform:perspective(900px) translateY(-2px) scale(.98) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.tcg-face:disabled{cursor:progress;filter:saturate(.6)}
+.tcg-face:focus-visible{outline:2px solid var(--lb-accent,#89b9d2);outline-offset:4px}
+
+.tcg-inner{position:relative;z-index:1;flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:2.4cqw;padding:3cqw;border-radius:3.4cqw;background:linear-gradient(180deg,#151b22,#0c1015);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .8),inset 0 0 0 2px rgb(255 255 255 / .045)}
+.tcg-head{min-width:0;display:flex;align-items:center;justify-content:space-between;gap:2cqw;padding:1.8cqw 2.6cqw;border-radius:2.2cqw;background:linear-gradient(90deg,rgb(255 255 255 / .075),rgb(255 255 255 / .02));border:1px solid rgb(255 255 255 / .06)}
+.tcg-name{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:clamp(11px,6cqw,16px);font-weight:650;letter-spacing:-.01em;color:#fff}
+.tcg-pips{display:flex;gap:1.3cqw;flex-shrink:0;padding-right:.6cqw}
+.tcg-art{position:relative;flex:1 1 0;min-height:0;display:grid;place-items:center;overflow:hidden;border-radius:2.2cqw;color:#565a5f;background:radial-gradient(ellipse at 50% 35%,#222a33,#11161c);box-shadow:0 0 0 1px rgb(255 255 255 / .08)}
+.tcg-art::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgb(0 0 0 / .6),inset 0 -18px 24px -16px rgb(0 0 0 / .35);pointer-events:none}
+.tcg-art img{width:100%;height:100%;object-fit:cover;object-position:50% 10%;transition:transform .6s var(--wb-ease)}
+.tcg-face:hover .tcg-art img{transform:scale(1.045)}
+.tcg-type{display:flex;align-items:center;gap:1.8cqw;padding:0 1cqw;font-size:clamp(9px,4.3cqw,12px);font-weight:550;color:#ffffff}
+.tcg-type svg{flex-shrink:0;width:clamp(10px,5cqw,14px);height:auto;color:var(--tier-ink,var(--lb-muted,#98a9b8))}
+.tcg-stats{padding:0 1cqw;font-size:clamp(9px,3.9cqw,11px);line-height:1.3;color:var(--lb-muted,#a4a8ac)}
+.tcg-foot{display:flex;align-items:center;justify-content:space-between;gap:2cqw;padding:1.6cqw 1cqw 0;border-top:1px solid rgb(255 255 255 / .06);font-size:clamp(8px,3.4cqw,10px);letter-spacing:.08em;text-transform:uppercase;color:var(--lb-dim,#737a80);font-variant-numeric:tabular-nums}
+.tcg-open{display:inline-flex;align-items:center;gap:1cqw;color:var(--tier-ink,#9be0ff);opacity:.6;transition:opacity .25s,transform .25s var(--wb-ease)}
+.tcg-open svg{width:clamp(9px,4cqw,13px);height:auto}
+.tcg-face:hover .tcg-open,.tcg-face:focus-visible .tcg-open{opacity:1;transform:translateX(2px)}
+
+/* Finish: soft light that follows the pointer. Foil, ring and sparks depend on the stage theme below. */
+.tcg-glare,.tcg-foil,.tcg-sparks{position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s}
+.tcg-glare{mix-blend-mode:soft-light;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),rgb(255 255 255 / .55),transparent 48%)}
+.tcg-face:hover .tcg-glare{opacity:.9}
+.tcg-foil{mix-blend-mode:color-dodge;background:linear-gradient(115deg,transparent 20%,var(--foil-a) 36%,var(--foil-b) 44%,var(--foil-c) 52%,var(--foil-a) 60%,transparent 76%) 0 0/250% 250% no-repeat;background-position:var(--mx,30%) var(--my,30%)}
+.tcg-face:hover .tcg-foil{opacity:var(--foil-hover,0)}
+.tcg-foil{opacity:var(--foil-rest,0)}
+
+/* Stage themes (DIS-002 v03): the card shows how far the character has travelled.
+   --tier rim · --tier-ink icon/pips · --tint-a/-b head band · --ring animated edge · --foil-* sheen. */
+.tcg-card{--tier:#3a4350;--tier-ink:#aab2bb;--tint-a:rgb(255 255 255 / .07);--tint-b:rgb(255 255 255 / .02);--tier-glow:transparent;
+  --foil-a:rgb(92 200 255 / .3);--foil-b:rgb(232 248 255 / .3);--foil-c:rgb(170 160 255 / .2)}
+.tcg-head{background:linear-gradient(90deg,var(--tint-a),var(--tint-b))}
+/* Progress stars: each stage up to rigging is half a star (3 stars), export is a whole fourth star. Tinted with the card theme. */
+.tcg-pips{gap:.8cqw;align-items:center}
+.tcg-pips i{display:block;width:4cqw;height:4cqw;min-width:8px;min-height:8px;background:rgb(255 255 255 / .16);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.tcg-pips i.on{background:linear-gradient(160deg,#fff 0%,var(--tier-ink) 45%,var(--tier) 100%);filter:drop-shadow(0 0 2px var(--tier-glow))}
+.tcg-pips i.half{background:linear-gradient(90deg,var(--tier-ink) 0 50%,rgb(255 255 255 / .16) 50%);filter:drop-shadow(0 0 2px var(--tier-glow))}
+.stage-export .tcg-pips i.on{animation:tcg-star 1.8s ease-in-out infinite alternate;animation-delay:calc(var(--s,0) * .25s)}
+@keyframes tcg-star{from{opacity:.6;transform:scale(.88)}to{opacity:1;transform:scale(1.08)}}
+.tcg-type{color:#fff}
+.tcg-type svg{color:var(--tier-ink)}
+/* Ring stages share one animated edge; the colours come from --ring. */
+.stage-textures .tcg-face::before,.stage-placement .tcg-face::before,.stage-rigging .tcg-face::before,.stage-export .tcg-face::before{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit;padding:1.6px;pointer-events:none;background:conic-gradient(from var(--glow-angle,0deg),var(--ring));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75}
+.stage-textures .tcg-face:hover::before,.stage-placement .tcg-face:hover::before,.stage-rigging .tcg-face:hover::before{opacity:1;animation:edge-orbit 3s linear infinite}
+
+/* 1 Concept: no colour yet; the art is greyscale and comes alive on hover. */
+.stage-concept{--tier:#5a5f66;--tier-ink:#c9ccd0;--tier-glow:rgb(255 255 255 / .08)}
+.stage-concept .tcg-art img{filter:grayscale(1) contrast(1.04);transition:filter .5s,transform .6s var(--wb-ease)}
+.stage-concept .tcg-face:hover .tcg-art img{filter:none}
+/* 2 Views: green */
+.stage-views{--tier:#33b477;--tier-ink:#6fe3a6;--tint-a:rgb(60 200 130 / .18);--tint-b:rgb(60 200 130 / .04);--tier-glow:rgb(60 200 130 / .28)}
+/* 3 3D form: blue */
+.stage-volume{--tier:#3f6ff0;--tier-ink:#8eabff;--tint-a:rgb(70 110 240 / .22);--tint-b:rgb(70 110 240 / .05);--tier-glow:rgb(70 110 240 / .3)}
+/* 4 Textures: celeste foil */
+.stage-textures{--tier:#5cc8ff;--tier-ink:#9be0ff;--tint-a:rgb(92 200 255 / .2);--tint-b:rgb(143 168 255 / .06);--tier-glow:rgb(92 200 255 / .3);
+  --ring:#5cc8ff,#f2fbff,#2fa8ec,#9be0ff,#8fa8ff,#5cc8ff;--foil-rest:.2;--foil-hover:.6}
+/* 5 Placement: celeste turning into gold */
+.stage-placement{--tier:#a9cfc8;--tier-ink:#bfe7de;--tint-a:rgb(92 200 255 / .2);--tint-b:rgb(245 210 122 / .16);--tier-glow:rgb(180 220 200 / .3);
+  --ring:#5cc8ff,#9be0ff,#f5d27a,#ffe9a8,#5cc8ff;--foil-a:rgb(92 200 255 / .3);--foil-b:rgb(255 240 200 / .32);--foil-c:rgb(245 210 122 / .26);--foil-rest:.24;--foil-hover:.62}
+/* 6 Rigging: mostly gold, a last trace of celeste */
+.stage-rigging{--tier:#e2bf6a;--tier-ink:#f5d27a;--tint-a:rgb(245 210 122 / .22);--tint-b:rgb(92 200 255 / .08);--tier-glow:rgb(245 210 122 / .3);
+  --ring:#f5d27a,#ffe9a8,#c9962e,#9be0ff,#f5d27a;--foil-a:rgb(245 210 122 / .32);--foil-b:rgb(255 246 220 / .32);--foil-c:rgb(140 210 255 / .18);--foil-rest:.26;--foil-hover:.64}
+.stage-rigging .tcg-face{background:linear-gradient(160deg,rgb(255 230 160 / .08),transparent 40%,rgb(0 0 0 / .3)),linear-gradient(145deg,#302c26,#16140f 48%,#28241c 72%,#110f0b)}
+/* 7 Export: gold with effects (always-on edge, moving foil, sparks) */
+.stage-export{--tier:#f5d27a;--tier-ink:#ffe08a;--tint-a:rgb(255 215 110 / .28);--tint-b:rgb(255 240 200 / .08);--tier-glow:rgb(255 200 90 / .38);
+  --ring:#f5d27a,#fff4d0,#c9962e,#ffe08a,#fff4d0,#f5d27a;--foil-a:rgb(255 205 90 / .34);--foil-b:rgb(255 248 225 / .36);--foil-c:rgb(255 225 140 / .3);--foil-rest:.34;--foil-hover:.7}
+.stage-export .tcg-face{background:linear-gradient(160deg,rgb(255 230 160 / .16),transparent 40%,rgb(0 0 0 / .3)),linear-gradient(145deg,#3b3220,#18140b 48%,#302816 72%,#120e07);
+  box-shadow:inset 0 0 0 1.5px var(--tier),inset 0 1px 0 1.5px rgb(255 240 200 / .18),0 0 0 1px #000,0 16px 30px rgb(0 0 0 / .5),0 0 22px rgb(255 200 90 / .16)}
+.stage-export .tcg-face::before{opacity:1;animation:edge-orbit 6s linear infinite}
+.stage-export .tcg-foil{animation:tcg-foil-drift 7s ease-in-out infinite alternate}
+.stage-export .tcg-face:hover .tcg-foil{animation:none}
+@keyframes tcg-foil-drift{from{background-position:10% 20%}to{background-position:90% 80%}}
+.stage-export .tcg-sparks{opacity:1;z-index:3}
+.stage-export .tcg-sparks::before,.stage-export .tcg-sparks::after{content:'';position:absolute;inset:0;border-radius:inherit;animation:tcg-twinkle 2.4s ease-in-out infinite alternate;
+  background:radial-gradient(2px 2px at 13% 19%,#fff6d8,transparent),radial-gradient(1.5px 1.5px at 84% 11%,#ffe08a,transparent),radial-gradient(2px 2px at 71% 61%,#fff,transparent),radial-gradient(1.5px 1.5px at 22% 74%,#ffe08a,transparent),radial-gradient(2.5px 2.5px at 91% 87%,#fff6d8,transparent)}
+.stage-export .tcg-sparks::after{animation-delay:1.2s;background:radial-gradient(1.5px 1.5px at 40% 8%,#fff,transparent),radial-gradient(2px 2px at 8% 52%,#ffe08a,transparent),radial-gradient(2px 2px at 60% 90%,#fff6d8,transparent),radial-gradient(1.5px 1.5px at 94% 42%,#fff,transparent),radial-gradient(2px 2px at 52% 32%,#ffe9a8,transparent)}
+@keyframes tcg-twinkle{from{opacity:.1}to{opacity:1}}
+
+.is-demo .tcg-art{background:repeating-linear-gradient(135deg,#141a20 0 8px,#11161b 8px 16px)}
+
+/* Trash: a small chip on the card corner, shown on hover/focus (always on touch screens). */
+.tcg-card .project-trash-button{right:-7px;top:-7px;z-index:3;width:30px;height:30px;border-radius:50%;border-color:#36424f;background:#141a21;color:#cbd6df;box-shadow:0 4px 12px rgb(0 0 0 / .5);opacity:0;transform:scale(.8);transition:opacity .2s,transform .2s var(--wb-ease),background-color .2s,color .2s}
+.tcg-card:hover .project-trash-button,.tcg-card:focus-within .project-trash-button{opacity:1;transform:none}
+.tcg-card .project-trash-button:hover{background:#5a2626;border-color:#8a3a3a;color:#fff}
+@media(hover:none){.tcg-card .project-trash-button{opacity:1;transform:none}}
+
+/* Empty library: a face-down card waiting to be filled. */
+.in-lobby .library-empty{grid-column:auto;aspect-ratio:63/88;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:24px;border:1.5px dashed #3a4a5a;border-radius:14px;color:var(--lb-muted);
+  background:radial-gradient(circle at 50% 42%,rgb(92 200 255 / .1),transparent 55%),repeating-linear-gradient(45deg,#0c1117 0 10px,#0f151c 10px 20px)}
+.in-lobby .library-empty svg{color:var(--lb-accent)}
+.in-lobby .library-empty h3{color:var(--lb-text);font-size:15px;margin:12px 0 4px}
+.in-lobby .library-empty p{font-size:11.5px;color:var(--lb-dim);text-align:center}
+
+@media(max-width:620px){.in-lobby .project-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}}
+.effects-off .tcg-foil,.effects-off .tcg-glare{display:none}
+.effects-off .tcg-card,.effects-off .tcg-face::before,.effects-off .tcg-face:hover::before,.effects-off .tcg-foil,.effects-off .tcg-sparks::before,.effects-off .tcg-sparks::after,.effects-off .tcg-pips i,.effects-off .sky-star,.effects-off .sky-comet,.effects-off .sky-star::before{animation:none}
+@media(prefers-reduced-motion:reduce){.tcg-foil,.tcg-glare,.tcg-sparks,.portal-warp,.sky-comet{display:none}}
+
+/* ---------- DIS-004: creator credit (replaces the lobby breadcrumb) ---------- */
+.creator-credit{display:flex;align-items:center;gap:10px;font-size:12px;color:#8f969e;min-width:0}
+.creator-credit a{display:inline-flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border-radius:99px;color:#fff;text-decoration:none;border:1px solid transparent;transition:background-color .2s,border-color .2s,transform .2s var(--wb-ease)}
+.creator-credit a:hover{background:rgb(255 255 255 / .06);border-color:rgb(255 255 255 / .12);transform:translateY(-1px)}
+.creator-credit a:focus-visible{outline:2px solid #5cc8ff;outline-offset:2px}
+.creator-credit strong{font-size:13px;font-weight:650;letter-spacing:.01em}
+.creator-logo{display:grid;place-items:center;width:26px;height:26px;flex-shrink:0;overflow:hidden;border-radius:50%;background:linear-gradient(145deg,#1d2a3a,#0d141d);border:1px solid #3a4a5c;color:#fff;font-size:12px;font-weight:700;text-transform:uppercase}
+.creator-logo img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- DIS-004: trash at the end of the project list ---------- */
+.library-footer{display:flex;justify-content:flex-end;margin-top:22px}
+.library-footer .trash-link{font-size:12px;color:#7d848c;padding:6px 10px;gap:6px}
+.library-footer .trash-link:hover:not(:disabled){color:#fff}
+
+/* ---------- DIS-004: full-screen "tools you need" (ToolsIntro.jsx) ---------- */
+.tools-intro{position:fixed;inset:0;z-index:250;display:grid;place-items:center;overflow-y:auto;padding:32px 20px;background:rgb(4 7 13 / .94);backdrop-filter:blur(8px);animation:wb-rise .35s var(--wb-ease) both}
+.tools-intro-inner{width:min(1040px,100%);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.tools-intro .eyebrow{color:#8f969e}
+.tools-intro h1{margin:0;font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.02em;color:#fff}
+.tools-intro-inner>p{margin:0 0 18px;color:#a3aab2;font-size:14px}
+.tools-grid{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:26px}
+.tool-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 18px 20px;border-radius:16px;background:linear-gradient(180deg,#121a24,#0b1017);border:1px solid #243140;animation:wb-rise .45s var(--wb-ease) both;animation-delay:calc(var(--i) * 70ms + 120ms);transition:transform .25s var(--wb-ease),border-color .25s,box-shadow .25s}
+.tool-card:hover{transform:translateY(-4px);border-color:#3f6a8a;box-shadow:0 14px 30px rgb(0 0 0 / .45),0 0 22px rgb(92 200 255 / .1)}
+.tool-icon{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;color:#9be0ff;background:radial-gradient(circle at 30% 25%,rgb(92 200 255 / .22),rgb(92 200 255 / .06));border:1px solid rgb(92 200 255 / .25)}
+.tool-card strong{font-size:17px;color:#fff}
+.tool-card small{min-height:32px;font-size:12.5px;line-height:1.35;color:#a3aab2}
+.tool-card .button{margin-top:auto;gap:7px}
+.tools-intro .button.large{padding:14px 28px;gap:9px}
+@media(max-width:620px){.tools-intro{place-items:start center}.tools-grid{grid-template-columns:1fr 1fr;gap:12px}.tool-card{padding:18px 12px 14px}}
+
+/* .fita save / open (lobby) */
+.library-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+.tcg-card .project-save-button{position:absolute;right:29px;top:-7px;z-index:3;display:grid;place-items:center;width:30px;height:30px;border:1px solid #36424f;border-radius:50%;background:#141a21;color:#cbd6df;box-shadow:0 4px 12px rgb(0 0 0 / .5);cursor:pointer;opacity:0;transform:scale(.8);transition:opacity .2s,transform .2s var(--wb-ease),background-color .2s,color .2s}
+.tcg-card:hover .project-save-button,.tcg-card:focus-within .project-save-button{opacity:1;transform:none}
+.tcg-card .project-save-button:hover{background:#163a55;border-color:#5cc8ff;color:#fff}
+.tcg-card .project-save-button:focus-visible{outline:2px solid #93d2ff;outline-offset:3px}
+.tcg-card .project-save-button:disabled{cursor:default;opacity:.35}
+@media(hover:none){.tcg-card .project-save-button{opacity:1;transform:none}}
+.archive-status{display:flex;align-items:center;gap:10px;margin:0 0 18px;padding:10px 12px 10px 14px;border:1px solid rgba(92,200,255,.35);border-radius:10px;background:rgba(14,24,44,.75);color:#fff;font-size:13px}
+.archive-status>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.archive-status svg{flex:none;color:#5cc8ff}
+.archive-status.is-error{border-color:rgba(255,120,120,.45)}
+.archive-status.is-error svg{color:#ff8a8a}
+.archive-close{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:6px;background:transparent;color:#b9c4d6;cursor:pointer}
+.archive-close:hover{background:rgba(255,255,255,.08);color:#fff}
+@media(max-width:620px){.library-actions{justify-content:flex-start;width:100%}}
+/* Free up space (lobby dialog) */
+.space-link{margin-left:10px;padding:3px 9px;border:1px solid rgba(92,200,255,.35);border-radius:999px;background:transparent;color:#cfeeff;font-size:10px;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.space-link:hover{background:rgba(92,200,255,.12);border-color:#5cc8ff;color:#fff}
+.space-link:disabled{opacity:.4;cursor:default}
+.space-cleanup{display:flex;flex-direction:column;gap:14px;color:#fff;font-size:13px}
+.space-lead{margin:0;color:#c9d2de;line-height:1.5}
+.space-help summary{cursor:pointer;color:#8fd6ff;font-size:12px}
+.space-help ul{margin:8px 0 0;padding-left:18px;color:#c9d2de;font-size:12px;line-height:1.7}
+.space-progress{display:flex;align-items:center;gap:9px;color:#cfeeff}
+.space-progress svg{color:#5cc8ff}
+.space-list,.space-trash ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;max-height:300px;overflow:auto}
+.space-list li,.space-trash li{display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid #2e3a4f;border-radius:9px;background:rgba(14,24,44,.55)}
+.space-list li.is-busy{opacity:.6}
+.space-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.space-size{color:#aab4c2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.space-size strong{color:#fff;font-weight:600}
+.space-note{color:#aab4c2;font-size:11px}
+.space-total{display:flex;align-items:center;gap:8px;color:#cfeeff}
+.space-total svg{color:#5cc8ff}
+.space-trash{border-top:1px solid #2e3449;padding-top:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.space-trash h3{margin:0;font-size:13px;font-weight:600;display:flex;gap:10px}
+.space-trash h3 span{color:#aab4c2;font-weight:400}
+.space-trash ul{width:100%}
+.space-confirm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#ffd0d0}
+.button.space-danger{background:#e56b6b;border-color:#e56b6b;color:#1a0d0d}
+.button.space-danger:hover{background:#f07f7f}

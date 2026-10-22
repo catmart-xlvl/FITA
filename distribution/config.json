@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "repository": "catmart-xlvl/FITA",
+  "channel": "stable",
+  "assetName": "FITA-update.zip",
+  "nodeVersion": "24.22.1",
+  "nodeArchiveSha256": "d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5"
+}

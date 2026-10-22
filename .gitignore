@@ -1,0 +1,21 @@
+node_modules/
+dist/
+data/
+projects/
+.runtime/
+runtime/
+user-data/
+versions/
+packages/
+output/
+tmp/
+*.pem
+*.crx
+*.log
+*.partial
+__pycache__/
+.env
+.env.*
+settings.json
+active.json
+FITA Extension/

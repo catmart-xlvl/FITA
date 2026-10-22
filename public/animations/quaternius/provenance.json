@@ -1,0 +1,13 @@
+{
+  "author": "Quaternius",
+  "pack": "Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "officialSource": "https://quaternius.itch.io/universal-animation-library",
+  "officialLicensePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+  "archiveMirror": "https://github.com/MightyBubble/Ludots-Assets",
+  "archiveCommit": "fab331eff1cb9c552c60399ea10186ef675cd460",
+  "archivePath": "animations/Quaternius-Universal-Animation-Library-Standard.zip",
+  "entry": "Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb",
+  "previewClips": ["Dance_Loop", "Walk_Loop", "Idle_Talking_Loop"],
+  "use": "Existing animations retargeted locally to the preserved character skeleton. No character mesh from this library is used."
+}

@@ -1,0 +1,164 @@
+{
+  "package": "@img/sharp-win32-x64",
+  "version": "0.35.5",
+  "declaredLicense": "Apache-2.0 AND LGPL-3.0-or-later",
+  "declarationsSource": "installed upstream README.md and package.json",
+  "versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3"
+  },
+  "libraries": [
+    {
+      "name": "aom",
+      "license": "BSD 2-Clause + [Alliance for Open Media Patent License 1.0](https://aomedia.org/license/patent-license/)"
+    },
+    {
+      "name": "cairo",
+      "license": "Mozilla Public License 1.1"
+    },
+    {
+      "name": "cgif",
+      "license": "MIT License"
+    },
+    {
+      "name": "expat",
+      "license": "MIT License"
+    },
+    {
+      "name": "fontconfig",
+      "license": "[fontconfig License](https://gitlab.freedesktop.org/fontconfig/fontconfig/blob/main/COPYING) (BSD-like)"
+    },
+    {
+      "name": "freetype",
+      "license": "[freetype License](https://git.savannah.gnu.org/cgit/freetype/freetype2.git/tree/docs/FTL.TXT) (BSD-like)"
+    },
+    {
+      "name": "fribidi",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "glib",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "harfbuzz",
+      "license": "MIT License"
+    },
+    {
+      "name": "highway",
+      "license": "BSD 3-Clause"
+    },
+    {
+      "name": "lcms",
+      "license": "MIT License"
+    },
+    {
+      "name": "libarchive",
+      "license": "BSD 2-Clause"
+    },
+    {
+      "name": "libexif",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "libffi",
+      "license": "MIT License"
+    },
+    {
+      "name": "libheif",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "libimagequant",
+      "license": "[BSD 2-Clause](https://github.com/lovell/libimagequant/blob/main/COPYRIGHT)"
+    },
+    {
+      "name": "libnsgif",
+      "license": "MIT License"
+    },
+    {
+      "name": "libpng",
+      "license": "[libpng License](https://github.com/pnggroup/libpng/blob/master/LICENSE)"
+    },
+    {
+      "name": "librsvg",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "libtiff",
+      "license": "[libtiff License](https://gitlab.com/libtiff/libtiff/blob/master/LICENSE.md) (BSD-like)"
+    },
+    {
+      "name": "libultrahdr",
+      "license": "MIT License"
+    },
+    {
+      "name": "libvips",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "libwebp",
+      "license": "New BSD License"
+    },
+    {
+      "name": "libxml2",
+      "license": "MIT License"
+    },
+    {
+      "name": "mozjpeg",
+      "license": "[zlib License, IJG License, BSD 3-Clause](https://github.com/mozilla/mozjpeg/blob/master/LICENSE.md)"
+    },
+    {
+      "name": "pango",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "pixman",
+      "license": "MIT License"
+    },
+    {
+      "name": "proxy-libintl",
+      "license": "LGPLv3"
+    },
+    {
+      "name": "zlib-ng",
+      "license": "[zlib License](https://github.com/zlib-ng/zlib-ng/blob/develop/LICENSE.md)"
+    }
+  ],
+  "binariesBundledInFitaZips": false,
+  "installation": "Downloaded directly from npm using package-lock.json",
+  "rightsPreserved": "Third-party modification, redistribution, replacement/relinking and debugging rights remain governed by their own licenses.",
+  "futureBinaryRedistribution": "Requires a separate exact-version notice/source/build/relinking compliance review; this candidate does not contain or mirror native DLLs.",
+  "upstream": [
+    "https://sharp.pixelplumbing.com/install/",
+    "https://github.com/lovell/sharp",
+    "https://github.com/lovell/sharp-libvips",
+    "https://github.com/libvips/build-win64-mxe"
+  ]
+}
