@@ -2,6 +2,8 @@
 
 [README](https://github.com/catmart-xlvl/FITA#readme) · [Download Windows ZIP](https://github.com/catmart-xlvl/FITA/releases/latest/download/FITA-Windows-x64.zip) · [Detailed installation notes](../INSTALL.md)
 
+For the complete end-user walkthrough, [download the illustrated Tutorial PDF](https://github.com/catmart-xlvl/FITA/raw/refs/heads/main/docs/FITA-Tutorial.pdf). It covers installation through export in 15 pages, with linked contents and no promotional cover.
+
 ## 1. Download and choose a location
 
 Download **FITA-Windows-x64.zip** from the Release assets and extract it completely. Open the inner **FITA** folder. Choose a writable local folder you intend to keep before the first launch.
