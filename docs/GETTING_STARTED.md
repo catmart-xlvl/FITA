@@ -41,8 +41,6 @@ Install the included extension in the browser you use for **Tripo Studio**. FITA
 
 ![Illustrated setup: Install once, Pair with FITA, Connect a Tripo tab](media/bridge-setup.webp)
 
-*ImageGen composition from supplied captures, including an English-localized browser screenshot. The readable individual controls appear below.*
-
 ### 3. Install the extension once
 
 1. Open **chrome://extensions**, **edge://extensions** or **brave://extensions** in the browser address bar.
@@ -50,9 +48,7 @@ Install the included extension in the browser you use for **Tripo Studio**. FITA
 3. Select **FITA Extension** beside **Open FITA.cmd** in the portable root folder.
 4. Confirm **FITA · Tripo Studio Bridge** appears and is enabled. Open it from the browser toolbar's Extensions menu; pin it if convenient.
 
-![English-localized manager showing Developer mode, Load unpacked and the enabled FITA bridge card](media/extensions-english.webp)
-
-*English-localized screenshot edited with ImageGen. This capture shows version 0.2.77. Use your installed version and your own Extension ID.*
+![Browser extension manager showing Developer mode, Load unpacked and the enabled FITA bridge card](media/extensions-english.webp)
 
 **Load unpacked** loads the included folder. You do not need **Pack extension**, a store upload or a `.crx` file. Keep the selected folder in place.
 
@@ -65,7 +61,7 @@ Install the included extension in the browser you use for **Tripo Studio**. FITA
 
 ![Actual empty Extension ID field and disabled Create pairing code button](media/screenshots/pairing-form.png)
 
-*Actual cropped form before an ID is entered. It is not a connected state. Private development paths and unrelated panels outside this crop are excluded.*
+*Enter your Extension ID to enable Create pairing code.*
 
 The button is disabled until a valid ID is entered. The code expires after **two minutes**; use **Create a new code** in FITA if necessary. Use your own ID and code, never an ID from documentation.
 

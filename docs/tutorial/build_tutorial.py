@@ -45,7 +45,7 @@ def figure(name, caption, height=235, width=WIDTH):
     image.drawWidth = image.imageWidth * scale
     image.drawHeight = image.imageHeight * scale
     image.hAlign = 'CENTER'
-    return [Spacer(1, 5), image, p(caption, 'FCaption')]
+    return [Spacer(1, 5), image] + ([p(caption, 'FCaption')] if caption else [])
 
 def steps(items):
     return [p('<b>%s.</b> %s' % (i + 1, item)) for i, item in enumerate(items)]
@@ -97,11 +97,11 @@ page('extension', '02 / Install the extension once', [
     'Enable <b>Developer mode</b>, then click <b>Load unpacked</b>.',
     'Select <b>FITA Extension</b> beside <b>Open FITA.cmd</b> in the extracted portable root. Do not select a folder inside versions.',
     'Confirm <b>FITA - Tripo Studio Bridge</b> is installed and enabled. Open its popup from the toolbar\'s Extensions menu.'
-]) + figure('extensions-english.webp', 'English-localized screenshot edited with ImageGen. The enabled toggles and version label illustrate this capture, not a connection check.', 280) + checkpoint('Use Load unpacked, not Pack extension. Keep the selected FITA Extension folder in place; do not remove and reinstall it for routine updates.'))
+]) + figure('extensions-english.webp', None, 280) + checkpoint('Use Load unpacked, not Pack extension. Keep the selected FITA Extension folder in place; do not remove and reinstall it for routine updates.'))
 
 page('pair', '03 / Pair, then connect a tab', [
     p('<b>A. Pair the browser:</b> copy the Extension ID from popup step 1 into <b>FITA - Connections - Extension ID</b>. Click <b>Create pairing code</b>. Enter the eight-digit code in popup step 2 and click <b>Pair</b>. The code expires after two minutes.'),
-] + figure('screenshots/pairing-form.png', 'Actual empty form crop. The disabled button becomes usable after a valid ID is entered. No private folder path is included.', 84) + [
+] + figure('screenshots/pairing-form.png', 'Enter your Extension ID to enable Create pairing code.', 84) + [
     p('<b>B. Connect the tab:</b> open Tripo Studio in this browser and sign in. Choose that tab in popup step 3. For the project workflow, enable <b>Allow explicit project commands on this tab</b>, then click <b>Connect selected tab</b>.'),
 ] + figure('screenshots/bridge-popup.png', 'Actual English popup before connection: code empty and permission unchecked. Use your own ID; the sample ID is not a pairing code.', 300) + [
     p('A remembered browser can reconnect while its stored credentials remain valid. Routine reopening does not normally require a new code. Revocation, cleared extension data or an invalid credential can require pairing again.'),
@@ -130,7 +130,7 @@ page('models', '06 / Generate and compare 3D models', [
     'Wait for the existing head tasks and candidate transfers. Use the body generation control when FITA enables the next required batch.',
     'Compare local previews by rotating the model and using the candidate eye controls or lower strip. A preview alone is not a saved choice.',
     'Click <b>Use this model</b> for the intended head and body. The chosen state is distinct from Preview only. You can change the choice while the stage remains editable; later dependent work can require returning to edit the stage.'
-]) + figure('workflow-stages.webp', 'Illustrated overview composed with ImageGen from real source captures. The third panel is the 3D preview and candidate stage, not Textures.', 220) + checkpoint('If a task needs attention, inspect/recover that task. Do not start another paid batch just because the response or download is late.'))
+]) + figure('workflow-stages.webp', None, 220) + checkpoint('If a task needs attention, inspect/recover that task. Do not start another paid batch just because the response or download is late.'))
 
 page('analysis', '07 / Analyze texture groups', steps([
     'In <b>Textures</b>, start with <b>Texture group analysis</b> and <b>Download analysis ZIP</b>.',
@@ -227,7 +227,6 @@ page('help', '14 / Troubleshooting and next steps', [
     p('Useful links', 'FHead'),
     p(link('Visual onboarding and browser guide', REPO + '/blob/main/docs/GETTING_STARTED.md') + '<br/>' + link('Latest release and checksums', REPO + '/releases/latest') + '<br/>' + link('Detailed installation and storage notes', REPO + '/blob/main/INSTALL.md') + '<br/>' + link('FITA Usage License', REPO + '/blob/main/LICENSE') + ' | ' + link('Third-party notices', REPO + '/blob/main/THIRD_PARTY_NOTICES.md')),
     p('Official unmodified FITA software may be used personally and commercially under its license. Modification/redistribution rights have their own conditions; your projects and outputs are not restricted by that software license. External services/tools retain their own terms and fees.', 'FCaption'),
-    p('This guide was checked against the published FITA 0.1.0 source. Captures show actual or explicitly illustrated states; they do not prove every provider workflow or a new complete production run. Provider UI and requirements can change.', 'FCaption')
 ])
 
 class TutorialDoc(SimpleDocTemplate):

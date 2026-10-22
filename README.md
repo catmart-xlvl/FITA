@@ -42,8 +42,6 @@ Install the bridge in the browser you use for Tripo. FITA itself may be open in 
 
 ![Illustrated setup: Install once, Pair with FITA, Connect a Tripo tab](https://raw.githubusercontent.com/catmart-xlvl/FITA/main/docs/media/bridge-setup.webp)
 
-*ImageGen composition from real captures, including an English-localized browser screenshot. Empty fields and the unchecked permission illustrate setup before connection.*
-
 1. **Install once.** Open `chrome://extensions`, `edge://extensions` or `brave://extensions`. Enable **Developer mode**, choose **Load unpacked**, and select the root **FITA Extension** folder beside **Open FITA.cmd**. Keep that folder in place.
 2. **Pair with FITA.** Open **FITA · Tripo Studio Bridge** from the browser's Extensions menu. Copy its **Extension ID** into **FITA → Connections → Extension ID**, then click **Create pairing code**. Enter the eight-digit code in the popup and click **Pair**. The code lasts two minutes; use your own ID and code.
 3. **Connect a Tripo tab.** Open Studio and sign in. Select its tab in the popup. For the project workflow, enable **Allow explicit project commands on this tab**, then click **Connect selected tab**. Read-only access and project-command access are different states; paid work still requires its applicable approvals.
@@ -55,8 +53,6 @@ A remembered browser can reconnect while its credentials remain valid; a new cod
 ## You review; FITA and your agent do the work
 
 ![Illustrated workflow: Reference, Review views and Generate 3D models](https://raw.githubusercontent.com/catmart-xlvl/FITA/main/docs/media/workflow-stages.webp)
-
-*Illustrated overview composed with ImageGen. [Original Concept capture](https://raw.githubusercontent.com/catmart-xlvl/FITA/main/docs/media/screenshots/concept.png) · [Original Views capture](https://raw.githubusercontent.com/catmart-xlvl/FITA/main/docs/media/screenshots/views.png). Small UI details in the collage are not an exact native-screen reproduction.*
 
 **Concept → Views → 3D form → Textures → Placement → Rigging → Export**
 
