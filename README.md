@@ -1,8 +1,24 @@
 # FITA — local character workbench
 
+Explore the character workflow in this short introduction to FITA.
+
+[![FITA workflow preview: comparing a head model in the 3D Form stage](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-overview.jpg)](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-introduction.mp4)
+
+**[Watch / download the FITA introduction](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-introduction.mp4)** · 0:45 · 1080p · MP4 · 34.9 MB
+
 FITA is a browser interface with a local Windows server and a Tripo Studio browser extension. It guides character references, model candidates, segmentation, textures, placement and avatar preparation. Some stages require an AI coding assistant, Blender, third-party services or manual review. A technical import does not establish artistic approval or VRChat client compatibility.
 
 Download the Windows package from [FITA Releases](https://github.com/catmart-xlvl/FITA/releases/latest). FITA's own code is covered by the [FITA Usage License](LICENSE): use of official unmodified versions is allowed, including personal and commercial use; modifying or redistributing FITA-specific software requires permission except where law or third-party rights permit it. FITA is not open source. This license adds no restrictions to users' projects or outputs.
+
+## A character in VRChat
+
+See one configured character in an in-game demonstration. Compatibility and results depend on each model and its setup.
+
+[![VRChat demonstration preview: a character making a peace sign](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-VRChat-example.jpg)](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-VRChat-demo.mp4)
+
+**[Watch / download the VRChat demonstration](https://github.com/catmart-xlvl/FITA/releases/download/v0.1.0/FITA-VRChat-demo.mp4)** · 0:17 · 1080p · MP4 · 25.1 MB
+
+Click either preview to open or download its original MP4. These links do not provide an embedded README video player.
 
 ## Windows portable installation
 
